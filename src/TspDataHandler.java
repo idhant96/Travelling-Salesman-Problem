@@ -168,9 +168,9 @@ public class TspDataHandler {
 //    }
 
     public List<int[]> processSymmetricData(String data) {
+    	System.out.println(data);
         String[] splitData = data.split("xxx");
         String temp = "";
-        int dimension = Integer.parseInt(splitData[1]);
         List<int[]> coordinates = new ArrayList<int[]>();
 
         String[] currentCoordinate;
@@ -178,8 +178,8 @@ public class TspDataHandler {
             int[] coordinateCurrent = new int[2];
             if (!splitData[i].contains("EOF")) {
                 currentCoordinate = splitData[i].split(" ");
-                coordinateCurrent[0] = Integer.parseInt(currentCoordinate[1]);
-                coordinateCurrent[1] = Integer.parseInt(currentCoordinate[2]);
+                coordinateCurrent[0] = (int) Float.parseFloat(currentCoordinate[1]);
+                coordinateCurrent[1] = (int) Float.parseFloat(currentCoordinate[2]);
                 coordinates.add(coordinateCurrent);
             }
         }

@@ -1,8 +1,7 @@
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Student implements Runnable{
-	    private boolean running = false;
+	    private boolean running = true;
 	    private int threadNumber, totalThreads;
 
 
@@ -13,9 +12,6 @@ public class Student implements Runnable{
 	    
 	    public void stopCompute() {
 	        this.running = false;
-	    }
-	    public void startCompute() {
-	        this.running = true;
 	    }
 
 	    private synchronized boolean continueCompute() {
@@ -63,6 +59,7 @@ public class Student implements Runnable{
 			if (exitFlag) {
 				break;
 			}
+			traversed++;
 		}
 	}
 

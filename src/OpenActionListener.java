@@ -1,22 +1,43 @@
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 public class OpenActionListener  implements ActionListener {
+	MenuPanel menuPanel;
+	OpenActionListener(MenuPanel menuPanel) {
+		this.menuPanel = menuPanel;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		CanvasPanel canvasPanel = (CanvasPanel) e.getSource();
+		
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-		int result = fileChooser.showOpenDialog(canvasPanel);
+		int result = fileChooser.showOpenDialog(menuPanel);
 		if (result == JFileChooser.APPROVE_OPTION) {
 		    File selectedFile = fileChooser.getSelectedFile();
-		    int height = canvasPanel.getHeight();
-			int width = canvasPanel.getWidth();
-			TspController.getInstance().loadFile(selectedFile, height, width);
+			Container parent = menuPanel.getParent();
+			Component[] children = parent.getComponents();
+			for(int i = 0 ; i < children.length; i++) {
+				Component child = children[i];
+				if(child instanceof CanvasPanel) {
+					CanvasPanel canvasPanel = (CanvasPanel) child;
+					int height = canvasPanel.getHeight();
+					int width = canvasPanel.getWidth();
+					TspController.getInstance().loadFile(selectedFile, height, width);
+					canvasPanel.setToInputState();
+				}
+			}
 		}
 	}
 

@@ -13,7 +13,11 @@ public class BlackBoard extends Observable {
     }
 
     public void addCoordinatesToDataPoints(int[] coordinate) {
+    	if(datapoints == null) {
+    		datapoints = new DataPoints();
+    	}
         datapoints.addCityCoordinates(coordinate);
+        update();
     }
 
     public DataPoints getDatapoints() {

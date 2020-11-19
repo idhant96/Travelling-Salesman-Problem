@@ -17,6 +17,7 @@ public class StopActionListener  implements ActionListener {
 			Component child = children[i];
 			if(child instanceof CanvasPanel) {
 				child = (CanvasPanel) child;
+				
 			}
 		}
 		
