@@ -59,7 +59,7 @@ public class BlackBoard extends Observable {
     }
 
     public Map<Integer, TspPath> getStartCityToTsppath() {
-        return startCityToTsppath;
+        return startCityToTspPath;
     }
 
     public TspShortestPaths getTspShortestPath() {
