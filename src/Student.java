@@ -37,10 +37,11 @@ public class Student implements Runnable{
 	    	start = end - div + 1;
     	}
 		temp = start;
-		System.out.println("Thread number " + threadNumber);
+		
 		while (traversed < datapointsSize) {
 			temp = start;
 			while (temp <= end) {
+				System.out.println("Thread number " + threadNumber + "city " + temp);
 				if (!continueCompute()) {
 					exitFlag= true;
 					break;
@@ -64,12 +65,12 @@ public class Student implements Runnable{
 			}
 			blackboard.setStudentRunStatus(threadNumber, false);
 			while (continueCompute()  && !blackboard.getRunStatusForStudent(threadNumber)){
-				System.out.println("Student going to sleep for " + threadNumber);
-				try {
-					Thread.sleep(5000);
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
+//				System.out.println("Student going to sleep for " + threadNumber);
+//				try {
+//					Thread.sleep(5000);
+//				} catch(Exception e) {
+//					e.printStackTrace();
+//				}
 			}
 			if (exitFlag) {
 				break;
