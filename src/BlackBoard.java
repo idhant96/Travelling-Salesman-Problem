@@ -8,17 +8,16 @@ public class BlackBoard extends Observable {
     private TspShortestPaths tspShortestPaths;
     private Map<Integer, TspPath> startCityToTsppath;
     private static BlackBoard blackboardInstance;
-    
+
     private BlackBoard() {
     }
 
-    public void addCoordinatesToDataPoints(List<int[]> coordinatesData) {
-
+    public void addCoordinatesToDataPoints(int[] coordinate) {
+        datapoints.addCityCoordinates(coordinate);
     }
 
     public DataPoints getDatapoints() {
-        return null;
-
+        return datapoints;
     }
 
     public void getTspShortestPaths() {
@@ -26,6 +25,9 @@ public class BlackBoard extends Observable {
     }
 
     public void cleanSlate() {
+        datapoints = null;
+        tspShortestPaths = null;
+
 
     }
 
@@ -43,10 +45,10 @@ public class BlackBoard extends Observable {
     }
 
     public static BlackBoard getInstance() {
-    	if(blackboardInstance == null) {
-    		blackboardInstance = new BlackBoard();
-    	}
-    	return blackboardInstance;
+        if (blackboardInstance == null) {
+            blackboardInstance = new BlackBoard();
+        }
+        return blackboardInstance;
     }
 
 }

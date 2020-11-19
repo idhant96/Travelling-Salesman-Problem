@@ -6,13 +6,62 @@ import java.util.Scanner;
 
 public class TspDataHandler {
 
-    public void loadDataPointsFromFile(String filePath) {
+    public void loadDataPointsFromFile(String filePath, int screenHeight, int screenWidth) {
         String rawTspData = readDataFromPath(filePath);
         List<int[]> processedTspData = processSymmetricData(rawTspData);
-        BlackBoard.getBlackBoardInstance().datapoints.coordinates = processedTspData;
+        List<int[]> scaledTspData = normalizeCoordinates(processedTspData, screenHeight, screenWidth);
 
+        for (int[] coordinate : scaledTspData) {
+            addCoordinatesToDataPoints(coordinate);
+        }
     }
 
+
+    public List<int[]> normalizeCoordinates(List<int[]> processedTspData, int screenHeight, int screenWidth) {
+        int minX = Integer.MAX_VALUE;
+        int maxX = -1;
+        int minY = Integer.MAX_VALUE;
+        int maxY = -1;
+        int xRange;
+        int yRange;
+        int xScaleFactor;
+        int yScaleFactor;
+        List<int[]> scaledTspInput = new ArrayList<int[]>();
+
+        for (int[] coordinate : processedTspData) {
+            if (coordinate[0] > maxX) {
+                maxX = coordinate[0];
+            }
+            if (coordinate[0] < minX) {
+                minX = coordinate[0];
+            }
+        }
+
+        for (int[] coordinate : processedTspData) {
+            if (coordinate[1] > maxY) {
+                maxY = coordinate[0];
+            }
+            if (coordinate[1] < minY) {
+                minY = coordinate[0];
+            }
+        }
+
+        xRange = maxX - minX;
+        yRange = maxY - minY;
+        xScaleFactor = Math.floorDiv(screenWidth, xRange);
+        yScaleFactor = Math.floorDiv(screenHeight, yRange);
+        int[] scaledCoordinate = new int[2];
+
+        for (int[] coordinate : processedTspData) {
+            scaledCoordinate[0] = (coordinate[0] - minX) * xScaleFactor;
+            scaledCoordinate[1] = (coordinate[1] - minY) * yScaleFactor;
+            scaledTspInput.add(scaledCoordinate);
+        }
+
+
+        return scaledTspInput;
+
+    }
 
     public String readDataFromPath(String path) {
         // This the module to read the data from the file specified in the path.
@@ -72,11 +121,9 @@ public class TspDataHandler {
 
     }
 
-    public void addCoordinatesToDataPoints() {
-
+    public void addCoordinatesToDataPoints(int[] coordinate) {
+        BlackBoard.getInstance().addCoordinatesToDataPoints(coordinate);
     }
 
-    public void normalizeCoordinates() {
 
-    }
 }
