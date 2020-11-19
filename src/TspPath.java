@@ -30,14 +30,6 @@ public class TspPath implements Comparable<TspPath>{
 	
 	@Override
 	public int compareTo(TspPath o) {
-//		int distance = this.totalDistance;
-//		if (o.totalDistance < distance) {
-//			return -1;
-//		}
-//		else if (o.totalDistance > distance) {
-//			return 1;
-//		}
-//		return 0;
 		return Integer.compare(this.totalDistance, o.totalDistance);
 	}
 
