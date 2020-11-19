@@ -4,10 +4,11 @@ import java.util.Map;
 import java.util.Observable;
 
 public class BlackBoard extends Observable {
-    DataPoints datapoints;
-    TspShortestPaths tspShortestPaths;
-    Map<Integer, TspPath> startToTsppath = new HashMap<Integer, TspPath>();
-
+    private DataPoints datapoints;
+    private TspShortestPaths tspShortestPaths;
+    private Map<Integer, TspPath> startCityToTsppath;
+    private static BlackBoard blackboardInstance;
+    
     private BlackBoard() {
 
     }
@@ -46,5 +47,11 @@ public class BlackBoard extends Observable {
 
     }
 
+    public static BlackBoard getInstance() {
+    	if(blackboardInstance == null) {
+    		blackboardInstance = new BlackBoard();
+    	}
+    	return blackboardInstance;
+    }
 
 }
