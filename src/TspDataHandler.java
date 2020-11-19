@@ -6,13 +6,13 @@ import java.util.Scanner;
 
 public class TspDataHandler {
 
-    public void loadDataPointsFromFile(String filePath, int screenHeight, int screenWidth) {
-        String rawTspData = readDataFromPath(filePath);
+    public void loadDataPointsFromFile(File fileObj, int screenHeight, int screenWidth) {
+        String rawTspData = readDataFromPath(fileObj);
         List<int[]> processedTspData = processSymmetricData(rawTspData);
         List<int[]> scaledTspData = normalizeCoordinates(processedTspData, screenHeight, screenWidth);
 
         for (int[] coordinate : scaledTspData) {
-            addCoordinatesToDataPoints(coordinate);
+            addCoordinatesToDataPoints(coordinate[0],coordinate[1]);
         }
     }
 
@@ -58,12 +58,11 @@ public class TspDataHandler {
             scaledTspInput.add(scaledCoordinate);
         }
 
-
         return scaledTspInput;
 
     }
 
-    public String readDataFromPath(String path) {
+    public String readDataFromPath(File fileObj) {
         // This the module to read the data from the file specified in the path.
         String data = "";
         String dimension = "";
@@ -71,7 +70,7 @@ public class TspDataHandler {
         String[] tempSplitArray;
         boolean dataStart = false;
         try {
-            File myObj = new File(path);
+            File myObj = fileObj;
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 currentLine = myReader.nextLine();
@@ -101,6 +100,45 @@ public class TspDataHandler {
 
     }
 
+
+//    public String readDataFromPath(String path) {
+//        // This the module to read the data from the file specified in the path.
+//        String data = "";
+//        String dimension = "";
+//        String currentLine = "";
+//        String[] tempSplitArray;
+//        boolean dataStart = false;
+//        try {
+//            File myObj = new File(path);
+//            Scanner myReader = new Scanner(myObj);
+//            while (myReader.hasNextLine()) {
+//                currentLine = myReader.nextLine();
+//                // The string "xxx" is used as an delimiter for the symmetrical
+//                // Data
+//
+//                if (dataStart) {
+//                    data += currentLine + "xxx";
+//                }
+//                // We use the header information to extract the dimension from
+//                // the file
+//                // We also use the header information to identify the start of
+//                // the actual data
+//                if (currentLine.contains("NODE_COORD_SECTION") || currentLine.contains("1 ")) {
+//                    dataStart = true;
+//                }
+//
+//            }
+//            myReader.close();
+//        } catch (FileNotFoundException e) {
+//            System.out.println("An error occurred.");
+//            e.printStackTrace();
+//        }
+//        // The data is passed on to the Data Processing Module in the form of a
+//        // String for processing.
+//        return data;
+//
+//    }
+
     public List<int[]> processSymmetricData(String data) {
         String[] splitData = data.split("xxx");
         String temp = "";
@@ -121,7 +159,8 @@ public class TspDataHandler {
 
     }
 
-    public void addCoordinatesToDataPoints(int[] coordinate) {
+    public void addCoordinatesToDataPoints(int xCoordinate, int yCoordinate) {
+        int[] coordinate = new int[]{xCoordinate,yCoordinate};
         BlackBoard.getInstance().addCoordinatesToDataPoints(coordinate);
     }
 
