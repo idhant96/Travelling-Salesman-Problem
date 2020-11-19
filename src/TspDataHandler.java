@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -12,8 +11,38 @@ public class TspDataHandler {
         List<int[]> scaledTspData = normalizeCoordinates(processedTspData, screenHeight, screenWidth);
 
         for (int[] coordinate : scaledTspData) {
-            addCoordinatesToDataPoints(coordinate[0],coordinate[1]);
+            addCoordinatesToDataPoints(coordinate[0], coordinate[1]);
         }
+    }
+
+
+    public void saveFile(File fileObj) {
+        DataPoints dataCoordinates = BlackBoard.getInstance().getDatapoints();
+        String fileContent = formatFileSaveContent(dataCoordinates.coordinates);
+        try {
+            File file = fileObj;
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(fileContent);
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public String formatFileSaveContent(List<int[]> coordinates){
+        String content = "";
+        int index = 0;
+
+        for (int[] coordinate : coordinates) {
+            index += 1;
+            content += Integer.toString(index) + " " + Integer.toString(coordinate[0]) + " " + Integer.toString(coordinate[1]) + "\n";
+        }
+        return content;
     }
 
 
@@ -160,7 +189,7 @@ public class TspDataHandler {
     }
 
     public void addCoordinatesToDataPoints(int xCoordinate, int yCoordinate) {
-        int[] coordinate = new int[]{xCoordinate,yCoordinate};
+        int[] coordinate = new int[]{xCoordinate, yCoordinate};
         BlackBoard.getInstance().addCoordinatesToDataPoints(coordinate);
     }
 

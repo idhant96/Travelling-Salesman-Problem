@@ -45,17 +45,18 @@ public class BlackBoard extends Observable {
 
     }
 
-    public void addTspPathForStartCity(int startCity, TspPath tspPathObj) {
+    public void addTspPathForStartCity( TspPath tspPathObj) {
         if (startCityToTspPath == null) {
             startCityToTspPath = new HashMap<>();
         }
-        startCityToTspPath.put(startCity, tspPathObj);
+        startCityToTspPath.put(tspPathObj.getStartCity(), tspPathObj);
     }
 
     public List<TspPath> getTspPaths() {
         return null;
 
     }
+
 
     public void update() {
         setChanged();
