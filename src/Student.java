@@ -37,11 +37,10 @@ public class Student implements Runnable{
 	    	start = end - div + 1;
     	}
 		temp = start;
-		
+		System.out.println("Thread number " + threadNumber + " start: " + start + " end: " + end);
 		while (traversed < datapointsSize) {
 			temp = start;
 			while (temp <= end) {
-				System.out.println("Thread number " + threadNumber + "city " + temp);
 				if (!continueCompute()) {
 					exitFlag= true;
 					break;

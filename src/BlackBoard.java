@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -101,7 +102,8 @@ public class BlackBoard extends Observable {
     		studentRunStatus = new HashMap<>();
     	}
     	boolean canProfessorRun = false;
-    	for(Integer studentNumber : studentRunStatus.keySet()) {
+    	List<Integer> keys = new ArrayList<>(studentRunStatus.keySet());
+    	for(Integer studentNumber : keys) {
     		if(studentRunStatus.get(studentNumber)) {
     			return false;
     		}
@@ -121,7 +123,8 @@ public class BlackBoard extends Observable {
     	if(studentRunStatus == null) {
     		studentRunStatus = new HashMap<>();
     	}
-    	for(Integer studentNumber : studentRunStatus.keySet()) {
+    	List<Integer> keys = new ArrayList<>(studentRunStatus.keySet());
+    	for(Integer studentNumber : keys) {
     		studentRunStatus.put(studentNumber, true);
     	}
     }
