@@ -16,9 +16,8 @@ public class OpenActionListener  implements ActionListener {
 		    File selectedFile = fileChooser.getSelectedFile();
 		    int height = canvasPanel.getHeight();
 			int width = canvasPanel.getWidth();
-			TspController
+			TspController.getInstance().loadFile(selectedFile, height, width);
 		}
-		
 	}
 
 }

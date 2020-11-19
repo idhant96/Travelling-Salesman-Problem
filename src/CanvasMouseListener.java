@@ -7,7 +7,7 @@ public class CanvasMouseListener implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		int x = e.getX();
 		int y = e.getY();
-		//TspController.addCoordinatesToDataPoints(x, y)
+		TspController.getInstance().addCoordinatesToDataPoints(x, y);
 	}
 
 	@Override

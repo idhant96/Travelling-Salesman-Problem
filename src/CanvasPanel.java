@@ -24,7 +24,6 @@ public class CanvasPanel extends JPanel implements Observer {
 		addMouseListener(new CanvasMouseListener());
 		setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		revalidate();
-//		currentState = State.INPUT_STATE;
 		draw = false;
 	}
 
@@ -47,15 +46,6 @@ public class CanvasPanel extends JPanel implements Observer {
 		}
 		draw = false;
 	}
-//
-//	public void setToInputState() {
-//		currentState = State.INPUT_STATE;
-//	}
-//	
-//	public void setToOutputState() {
-//		currentState = State.OUTPUT_STATE;
-//	}
-//	
 	
 	private void drawLine(Graphics g, TspPath tspPath, DataPoints dataPoints, Color lineColor) {
 		List<Integer> cities = tspPath.getPath();

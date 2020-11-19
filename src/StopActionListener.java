@@ -5,7 +5,7 @@ public class StopActionListener  implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		TspController.getInstance().stop();
 		
 	}
 
