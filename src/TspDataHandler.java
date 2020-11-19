@@ -1,3 +1,6 @@
+import com.sun.tools.jconsole.JConsoleContext;
+import com.sun.tools.jconsole.JConsolePlugin;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -6,10 +9,13 @@ import java.util.Scanner;
 public class TspDataHandler {
 
     public void loadDataPointsFromFile(File fileObj, int screenHeight, int screenWidth) {
+        System.out.println("screen height: "+screenHeight + "screen width: "+screenWidth);
         String rawTspData = readDataFromPath(fileObj);
         List<int[]> processedTspData = processSymmetricData(rawTspData);
         List<int[]> scaledTspData = normalizeCoordinates(processedTspData, screenHeight, screenWidth);
+
         for (int[] coordinate : scaledTspData) {
+            System.out.println("scaled x: " + coordinate[0] + "scaled y: " + coordinate[1]);
             addCoordinatesToDataPoints(coordinate[0], coordinate[1]);
         }
     }
@@ -52,8 +58,8 @@ public class TspDataHandler {
         int maxY = -1;
         int xRange;
         int yRange;
-        int xScaleFactor;
-        int yScaleFactor;
+        float xScaleFactor;
+        float yScaleFactor;
         List<int[]> scaledTspInput = new ArrayList<int[]>();
 
         for (int[] coordinate : processedTspData) {
@@ -67,22 +73,27 @@ public class TspDataHandler {
 
         for (int[] coordinate : processedTspData) {
             if (coordinate[1] > maxY) {
-                maxY = coordinate[0];
+                maxY = coordinate[1];
             }
             if (coordinate[1] < minY) {
-                minY = coordinate[0];
+                minY = coordinate[1];
             }
         }
 
         xRange = maxX - minX;
         yRange = maxY - minY;
-        xScaleFactor = Math.floorDiv(screenWidth, xRange);
-        yScaleFactor = Math.floorDiv(screenHeight, yRange);
-        int[] scaledCoordinate = new int[2];
+        xScaleFactor = (float)screenWidth/xRange;
+        yScaleFactor = (float)screenHeight/yRange;
+        System.out.println("xscale factor: "+xScaleFactor);
+        System.out.println("y scale factor: "+yScaleFactor);
+        System.out.println("x range : "+xRange);
+        System.out.println("yRange: "+yRange);
+
 
         for (int[] coordinate : processedTspData) {
-            scaledCoordinate[0] = (coordinate[0] - minX) * xScaleFactor;
-            scaledCoordinate[1] = (coordinate[1] - minY) * yScaleFactor;
+            int[] scaledCoordinate = new int[2];
+            scaledCoordinate[0] = (int) Math.ceil ((coordinate[0] - minX) * xScaleFactor);
+            scaledCoordinate[1] = (int) Math.ceil ((coordinate[1] - minY) * yScaleFactor);
             scaledTspInput.add(scaledCoordinate);
         }
 
