@@ -16,8 +16,7 @@ public class TspController {
 
     public void loadFile(File file, int scaleToHeight, int scaleToWidth) {
         TspDataHandler dataHandler = new TspDataHandler();
-        // dataHandler.loadDataPointsFromFile(file);
-        //dataHandler.loadDataPointsFromFile(filePath, scaleToHeight, scaleToWidth);
+        dataHandler.loadDataPointsFromFile(file, scaleToHeight, scaleToWidth);
     }
 
     public void saveFile(File filePath) {

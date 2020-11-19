@@ -25,19 +25,19 @@ public class CanvasPanel extends JPanel implements Observer {
 		setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		revalidate();
 		TspController.getInstance().observeBlackboard(this);
-		currentState = State.INPUT_STATE;
+		currentState = State.INIT_STATE;
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if(currentState ==  State.INPUT_STATE) {
-			DataPoints dataPoints = TspController.getInstance().getDataPoints(); 
+			DataPoints dataPoints = TspController.getInstance().getDataPoints();
 			if(currentState == State.INPUT_STATE) {
 				for(int[] coordinate : dataPoints.coordinates) {
 					g.setColor(POINTS_COLOR);
 					g.fillOval(coordinate[0], coordinate[1], VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
 				}
-			} else {
+			} else if (currentState == State.OUTPUT_STATE){
 				TspShortestPaths tspShortestPaths = TspController.getInstance().getTspShortestPaths();
 				drawLine(g, tspShortestPaths.getFirstShortestPath(), dataPoints, FIRST_PATH_COLOR);
 				drawLine(g, tspShortestPaths.getSecondShortestPath(), dataPoints, SECOND_PATH_COLOR);
@@ -79,6 +79,7 @@ public class CanvasPanel extends JPanel implements Observer {
 	}
 	
 	enum State {
+		INIT_STATE,
 		INPUT_STATE,
 		OUTPUT_STATE
 	}
@@ -86,6 +87,7 @@ public class CanvasPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("Points added");
 		repaint();
 	}
 	

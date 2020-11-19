@@ -29,7 +29,7 @@ public class Student implements Runnable{
 		Map<Integer, TspPath> path;
 		BlackBoard blackboard;
 		blackboard = BlackBoard.getInstance();
-    	datapointsSize = blackboard.getDatapointsSize();
+//    	datapointsSize = blackboard.getDatapointsSize();
 		datapointsSize = 100;
     	div = Math.round(datapointsSize/totalThreads);
     	if (threadNumber == totalThreads) {

@@ -11,6 +11,7 @@ public class MenuPanel extends JPanel {
 	MenuPanel() {
 		super(new FlowLayout(FlowLayout.LEFT));
 		JMenuBar menuBar = new JMenuBar();
+		add(menuBar);
 		JMenu fileMenu = createFileMenu();
 		JMenu projectMenu = createProjectMenu();
 		JMenu aboutMenu  = createAboutMenu();
@@ -18,7 +19,7 @@ public class MenuPanel extends JPanel {
 		menuBar.add(fileMenu);
 		menuBar.add(projectMenu);
 		menuBar.add(aboutMenu);
-		add(menuBar);
+		
 		this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 20));
 		
 	}
@@ -27,6 +28,9 @@ public class MenuPanel extends JPanel {
 		JMenu fileMenu = new JMenu("File");
 		JMenuItem openMenuItem = new JMenuItem("Open");
 		JMenuItem saveMenuItem = new JMenuItem("Save");
+		
+		openMenuItem.addActionListener(new OpenActionListener(this));
+		saveMenuItem.addActionListener(new SaveActionListener());
 		
 		fileMenu.add(openMenuItem);
 		fileMenu.add(saveMenuItem);
@@ -42,6 +46,8 @@ public class MenuPanel extends JPanel {
 		
 		
 		runMenuItem.addActionListener(new RunActionListener());
+		newMenuItem.addActionListener(new NewActionListener());
+		stopMenuItem.addActionListener(new StopActionListener());
 		
 		projectMenu.add(newMenuItem);
 		projectMenu.add(runMenuItem);
