@@ -7,7 +7,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel {
-	
+	CanvasPanel canvasPanel;
 	MenuPanel() {
 		super(new FlowLayout(FlowLayout.LEFT));
 		JMenuBar menuBar = new JMenuBar();
@@ -24,12 +24,22 @@ public class MenuPanel extends JPanel {
 		
 	}
 	
+	public void setCanvasPanel(CanvasPanel canvasPanel) {
+		this.canvasPanel = canvasPanel;
+	}
+	
+	public CanvasPanel getCanvasPanel() {
+		return canvasPanel;
+	}
+	
+
+	
 	private JMenu createFileMenu() {
 		JMenu fileMenu = new JMenu("File");
 		JMenuItem openMenuItem = new JMenuItem("Open");
 		JMenuItem saveMenuItem = new JMenuItem("Save");
 		
-		openMenuItem.addActionListener(new OpenActionListener(this));
+		openMenuItem.addActionListener(new OpenActionListener());
 		saveMenuItem.addActionListener(new SaveActionListener());
 		
 		fileMenu.add(openMenuItem);
@@ -43,6 +53,7 @@ public class MenuPanel extends JPanel {
 		JMenuItem newMenuItem = new JMenuItem("New");
 		JMenuItem runMenuItem = new JMenuItem("Run");
 		JMenuItem stopMenuItem = new JMenuItem("Stop");
+		
 		
 		
 		runMenuItem.addActionListener(new RunActionListener());

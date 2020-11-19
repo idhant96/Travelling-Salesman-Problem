@@ -21,10 +21,16 @@ public class Professor implements Runnable {
 				TspPath cloned = deepClone(startCityToTspPath.get(startCity));
 				paths.add(cloned);
 			}
-			
+			System.out.println(startCityToTspPath);
+			System.out.println("Proff running");
 			Collections.sort(paths);
 			if(paths.size() >= 3) {
 				BlackBoard.getInstance().setShortestTspPaths(paths.get(0), paths.get(1), paths.get(2));	
+			}
+			try {
+				Thread.sleep(1000);
+			} catch(Exception e) {
+				e.printStackTrace();
 			}
 		}
 	}

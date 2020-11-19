@@ -38,6 +38,7 @@ public class CanvasPanel extends JPanel implements Observer {
 					g.fillOval(coordinate[0], coordinate[1], VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
 				}
 			} else if (currentState == State.OUTPUT_STATE){
+				System.out.println("OutputState");
 				TspShortestPaths tspShortestPaths = TspController.getInstance().getTspShortestPaths();
 				drawLine(g, tspShortestPaths.getFirstShortestPath(), coordinates, FIRST_PATH_COLOR);
 				drawLine(g, tspShortestPaths.getSecondShortestPath(), coordinates, SECOND_PATH_COLOR);

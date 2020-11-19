@@ -8,6 +8,7 @@ public class BlackBoard extends Observable {
     private TspShortestPaths tspShortestPaths;
     private Map<Integer, TspPath> startCityToTspPath;
     private static BlackBoard blackboardInstance;
+    private Map<Integer, Boolean> studentRunStatus;
 
     private BlackBoard() {
     }
@@ -83,6 +84,37 @@ public class BlackBoard extends Observable {
         update();
     }
 
+    public boolean getRunStatusForStudent(int studentNumber) {
+    	if(studentRunStatus == null) {
+    		studentRunStatus = new HashMap<>();
+    	}
+    	if(studentRunStatus.containsKey(studentNumber)){
+    		return studentRunStatus.get(studentNumber);
+    	} else {
+    		studentRunStatus.put(studentNumber, true);
+    		return true;
+    	}
+    }
+    
+    public boolean canProfessorRun() {
+    	for(Integer studentNumber : studentRunStatus.keySet()) {
+    		if(studentRunStatus.get(studentNumber)) {
+    			return false;
+    		}
+    	}
+    	return true;
+    }
+    
+    public void setStudentRunStatus(int studentNumber, boolean status) {
+    	studentRunStatus.put(studentNumber, status);
+    }
+    
+    public void setAllStudentStatusToTrue() {
+    	for(Integer studentNumber : studentRunStatus.keySet()) {
+    		studentRunStatus.put(studentNumber, true);
+    	}
+    }
+    
     public static BlackBoard getInstance() {
         if (blackboardInstance == null) {
             blackboardInstance = new BlackBoard();

@@ -6,22 +6,24 @@ public class Classroom {
 	private Professor professor;
 
 	public void start() {
-		Thread tempThread;
+		if(students == null) {
+			students = new ArrayList<>();
+		}
 		if (students.isEmpty()) {
 			students = new ArrayList<Student>();
 			Student student;
 			for (int i=1;i<=studentCount; i++) {
 				student = new Student(i, studentCount);
 				students.add(student);
-				tempThread = new Thread(student);
-				tempThread.start();
+				Thread studentThread = new Thread(student);
+				studentThread.start();
 			}
 		}
 		if (professor == null) {
 			professor = new Professor();
 		}
-		tempThread = new Thread(professor);
-		tempThread.run(); 
+		Thread professorThread = new Thread(professor);
+		professorThread.start(); 
 		
 	}
 	

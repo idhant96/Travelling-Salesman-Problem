@@ -9,13 +9,11 @@ import java.util.Scanner;
 public class TspDataHandler {
 
     public void loadDataPointsFromFile(File fileObj, int screenHeight, int screenWidth) {
-        System.out.println("screen height: "+screenHeight + "screen width: "+screenWidth);
         String rawTspData = readDataFromPath(fileObj);
         List<int[]> processedTspData = processSymmetricData(rawTspData);
         List<int[]> scaledTspData = normalizeCoordinates(processedTspData, screenHeight, screenWidth);
 
         for (int[] coordinate : scaledTspData) {
-            System.out.println("scaled x: " + coordinate[0] + "scaled y: " + coordinate[1]);
             addCoordinatesToDataPoints(coordinate[0], coordinate[1]);
         }
     }
@@ -84,10 +82,10 @@ public class TspDataHandler {
         yRange = maxY - minY;
         xScaleFactor = (float)screenWidth/xRange;
         yScaleFactor = (float)screenHeight/yRange;
-        System.out.println("xscale factor: "+xScaleFactor);
-        System.out.println("y scale factor: "+yScaleFactor);
-        System.out.println("x range : "+xRange);
-        System.out.println("yRange: "+yRange);
+//        System.out.println("xscale factor: "+xScaleFactor);
+//        System.out.println("y scale factor: "+yScaleFactor);
+//        System.out.println("x range : "+xRange);
+//        System.out.println("yRange: "+yRange);
 
 
         for (int[] coordinate : processedTspData) {
@@ -198,7 +196,7 @@ public class TspDataHandler {
     }
 
     public void addCoordinatesToDataPoints(int xCoordinate, int yCoordinate) {
-    	System.out.println("Adding coordinate points " + xCoordinate + " " + yCoordinate);
+//    	System.out.println("Adding coordinate points " + xCoordinate + " " + yCoordinate);
         int[] coordinate = new int[]{xCoordinate, yCoordinate};
         BlackBoard.getInstance().addCoordinatesToDataPoints(coordinate);
     }

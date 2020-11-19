@@ -9,6 +9,9 @@ public class NearestNeighbor {
 		DataPoints dataPoints = BlackBoard.getInstance().getDatapoints();
 		List<Integer> path = tspPath.getPath();
 		Set<Integer> visited = new HashSet<>(path);
+		if(path.size() == 0) {
+			return;
+		}
 		int lastVisited = path.get(path.size()-1);
 
 		int minDistance = Integer.MAX_VALUE;

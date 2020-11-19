@@ -37,7 +37,7 @@ public class Student implements Runnable{
 	    	start = end - div + 1;
     	}
 		temp = start;
-		
+		System.out.println("Thread number " + threadNumber);
 		while (traversed < datapointsSize) {
 			temp = start;
 			while (temp <= end) {
@@ -46,15 +46,19 @@ public class Student implements Runnable{
 					break;
 				}
 				tspPath = blackboard.getTspPathForStartCity(start);
-				if (tspPath != null) {
-					nearestNeaighbour.calculateNextNearestNeighbor(tspPath);
-				}
-				else {
+				if(tspPath == null) {
 					tspPath = new TspPath(temp);
+					tspPath.addCityToPath(temp);
 					blackboard.addTspPathForStartCity(tspPath);
 				}
-				
+				nearestNeaighbour.calculateNextNearestNeighbor(tspPath);
+				System.out.println(tspPath.getPath());
 				temp++;
+				try {
+					Thread.sleep(1000);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 			if (exitFlag) {
 				break;
