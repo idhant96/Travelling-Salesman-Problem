@@ -26,7 +26,12 @@ public class TspController {
     }
 
     public void start() {
-        classroom.start();
+    	if(classroom == null) {
+    		classroom = new Classroom();
+    	}
+        Thread t = new Thread(classroom);
+        t.start();
+        
     }
 
     public void stop() {
@@ -34,6 +39,7 @@ public class TspController {
     }
 
     public void cleanSlate() {
+    	classroom = new Classroom();
         BlackBoard.getInstance().cleanSlate();
     }
 

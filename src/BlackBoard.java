@@ -55,11 +55,6 @@ public class BlackBoard extends Observable {
         startCityToTspPath.put(tspPathObj.getStartCity(), tspPathObj);
     }
 
-    public List<TspPath> getTspPaths() {
-        return null;
-
-    }
-
 
     public void update() {
         setChanged();
@@ -83,50 +78,6 @@ public class BlackBoard extends Observable {
         tspShortestPaths.setSecondShortestPath(secondShortestPath);
         tspShortestPaths.setThirdShortestPath(thirdShortestPath);
         update();
-    }
-
-    public boolean getRunStatusForStudent(int studentNumber) {
-    	if(studentRunStatus == null) {
-    		studentRunStatus = new HashMap<>();
-    	}
-    	if(studentRunStatus.containsKey(studentNumber)){
-    		return studentRunStatus.get(studentNumber);
-    	} else {
-    		studentRunStatus.put(studentNumber, true);
-    		return true;
-    	}
-    }
-    
-    public boolean canProfessorRun() {
-    	if(studentRunStatus == null) {
-    		studentRunStatus = new HashMap<>();
-    	}
-    	boolean canProfessorRun = false;
-    	List<Integer> keys = new ArrayList<>(studentRunStatus.keySet());
-    	for(Integer studentNumber : keys) {
-    		if(studentRunStatus.get(studentNumber)) {
-    			return false;
-    		}
-    		canProfessorRun = true;
-    	}
-    	return canProfessorRun;
-    }
-    
-    public void setStudentRunStatus(int studentNumber, boolean status) {
-    	if(studentRunStatus == null) {
-    		studentRunStatus = new HashMap<>();
-    	}
-    	studentRunStatus.put(studentNumber, status);
-    }
-    
-    public void setAllStudentStatusToTrue() {
-    	if(studentRunStatus == null) {
-    		studentRunStatus = new HashMap<>();
-    	}
-    	List<Integer> keys = new ArrayList<>(studentRunStatus.keySet());
-    	for(Integer studentNumber : keys) {
-    		studentRunStatus.put(studentNumber, true);
-    	}
     }
     
     public static BlackBoard getInstance() {

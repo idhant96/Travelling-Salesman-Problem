@@ -1,80 +1,60 @@
 
+public class Student implements Runnable {
+	private boolean running = true;
+	private int threadNumber, totalThreads;
 
-public class Student implements Runnable{
-	    private boolean running = true;
-	    private int threadNumber, totalThreads;
+	Student(int threadNumber, int totalThreads) {
+		this.threadNumber = threadNumber;
+		this.totalThreads = totalThreads;
+	}
 
+	public void stopCompute() {
+		this.running = false;
+	}
 
-	    Student(int threadNumber, int totalThreads){
-	    	this.threadNumber = threadNumber;
-	    	this.totalThreads = totalThreads;
-	    }
-	    
-	    public void stopCompute() {
-	        this.running = false;
-	    }
+	private synchronized boolean continueCompute() {
+		return this.running == true;
+	}
 
-	    private synchronized boolean continueCompute() {
-	        return this.running == true;
-	    }
 	@Override
 	public void run() {
 		BlackBoard blackboard = BlackBoard.getInstance();
-		boolean exitFlag=false;
 		TspPath tspPath;
+
 		NearestNeighbor nearestNeaighbour = new NearestNeighbor();
-		int start, end, datapointsSize, div, temp, traversed=0;
-    	datapointsSize = blackboard.getDatapoints().getLength();
-    	div = Math.round(datapointsSize/totalThreads);
-    	if (threadNumber == totalThreads) {
+		int start, end, datapointsSize, div, temp;
+		datapointsSize = blackboard.getDatapoints().getLength();
+		div = Math.round(datapointsSize / totalThreads);
+		if (threadNumber == totalThreads) {
 //    		System.out.println("this is last thread" + threadNumber);
-    		end = datapointsSize;
-    		start = (div * (threadNumber-1)) + 1;
-    	}
-    	else {
+			end = datapointsSize;
+			start = (div * (threadNumber - 1)) + 1;
+		} else {
 //    		System.out.println("this is not last thread" + threadNumber);
-	    	end = div * threadNumber;
-	    	start = end - div + 1;
-    	}
+			end = div * threadNumber;
+			start = end - div + 1;
+		}
 		temp = start;
 		System.out.println("Thread number " + threadNumber + " start: " + start + " end: " + end);
-		while (traversed < datapointsSize) {
-			temp = start;
-			while (temp <= end) {
-				if (!continueCompute()) {
-					exitFlag= true;
-					break;
-				}
-				tspPath = blackboard.getTspPathForStartCity(start);
-				if(tspPath == null) {
-					tspPath = new TspPath(temp);
-					tspPath.addCityToPath(temp);
-					blackboard.addTspPathForStartCity(tspPath);
-				}
-				nearestNeaighbour.calculateNextNearestNeighbor(tspPath);
-				System.out.println(tspPath.getPath());
-				temp++;
-				
-//				try {
-//					Thread.sleep(1000);
-//				} catch(Exception e) {
-//					e.printStackTrace();
-//				}
-			
-			}
-			blackboard.setStudentRunStatus(threadNumber, false);
-			while (continueCompute()  && !blackboard.getRunStatusForStudent(threadNumber)){
-//				System.out.println("Student going to sleep for " + threadNumber);
-//				try {
-//					Thread.sleep(5000);
-//				} catch(Exception e) {
-//					e.printStackTrace();
-//				}
-			}
-			if (exitFlag) {
+		while (temp <= end) {
+//			System.out.println("Thread number " + threadNumber + " CurrCity: " + temp);
+			if (!continueCompute()) {
 				break;
 			}
-			traversed++;
+			tspPath = blackboard.getTspPathForStartCity(start);
+			if (tspPath == null) {
+				tspPath = new TspPath(temp);
+				tspPath.addCityToPath(temp);
+				blackboard.addTspPathForStartCity(tspPath);
+			}
+			nearestNeaighbour.calculateNextNearestNeighbor(tspPath);
+			temp++;
+			try {
+				Thread.sleep(100);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+
 		}
 	}
 

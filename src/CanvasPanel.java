@@ -32,6 +32,7 @@ public class CanvasPanel extends JPanel implements Observer {
 		super.paintComponent(g);
 		if(currentState ==  State.INPUT_STATE) {
 			List<int[]> coordinates = TspController.getInstance().getCoordinatesDataPoints();
+			System.out.println("State is " + currentState);
 			if(currentState == State.INPUT_STATE) {
 				for(int[] coordinate : coordinates) {
 					g.setColor(POINTS_COLOR);
@@ -88,6 +89,7 @@ public class CanvasPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
+		System.out.println("Update");
 		repaint();
 	}
 	
