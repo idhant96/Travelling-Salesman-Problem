@@ -10,12 +10,12 @@ import javax.swing.JPanel;
 public class CanvasPanel extends JPanel implements Observer {
 	
 	private static final long serialVersionUID = 6981842796760492347L;
-	private boolean draw;
 	private static final int VISITED_CITY_PAINT_DIAMETER= 5;
 	private static final Color FIRST_PATH_COLOR = Color.RED;
 	private static final Color SECOND_PATH_COLOR = Color.PINK;
 	private static final Color THIRD_PATH_COLOR = Color.ORANGE;
 	private static final Color POINTS_COLOR = Color.BLUE;
+	private State currentState;;
 	
 	public CanvasPanel() {
 		super();
@@ -24,14 +24,15 @@ public class CanvasPanel extends JPanel implements Observer {
 		addMouseListener(new CanvasMouseListener());
 		setMaximumSize(new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE));
 		revalidate();
-		draw = false;
+		TspController.getInstance().observeBlackboard(this);
+		currentState = State.INPUT_STATE;
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if(draw) {
+		if(currentState ==  State.INPUT_STATE) {
 			DataPoints dataPoints = TspController.getInstance().getDataPoints(); 
-			if(!TspController.getInstance().isTspComputing()) {
+			if(currentState == State.INPUT_STATE) {
 				for(int[] coordinate : dataPoints.coordinates) {
 					g.setColor(POINTS_COLOR);
 					g.fillOval(coordinate[0], coordinate[1], VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
@@ -41,10 +42,8 @@ public class CanvasPanel extends JPanel implements Observer {
 				drawLine(g, tspShortestPaths.getFirstShortestPath(), dataPoints, FIRST_PATH_COLOR);
 				drawLine(g, tspShortestPaths.getSecondShortestPath(), dataPoints, SECOND_PATH_COLOR);
 				drawLine(g, tspShortestPaths.getThirdShortestPath(), dataPoints, THIRD_PATH_COLOR);
-
 			}
 		}
-		draw = false;
 	}
 	
 	private void drawLine(Graphics g, TspPath tspPath, DataPoints dataPoints, Color lineColor) {
@@ -71,6 +70,14 @@ public class CanvasPanel extends JPanel implements Observer {
 		}
 	}
 	
+	public void setToInputState() {
+		currentState = State.INPUT_STATE;
+	}
+	
+	public void setToOuputState() {
+		currentState = State.OUTPUT_STATE;
+	}
+	
 	enum State {
 		INPUT_STATE,
 		OUTPUT_STATE
@@ -79,7 +86,6 @@ public class CanvasPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		draw = true;
 		repaint();
 	}
 	

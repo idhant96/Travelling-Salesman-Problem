@@ -42,10 +42,6 @@ public class TspController {
 		//dataHandler.addCoordinatesToDataPoints(x, y);
 	}
 	
-	public boolean isTspComputing() {
-		return BlackBoard.getInstance().isTspComputing();
-	}
-	
 	public DataPoints getDataPoints() {
 		return BlackBoard.getInstance().getDatapoints();
 	}

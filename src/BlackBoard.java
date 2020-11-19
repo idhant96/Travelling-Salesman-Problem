@@ -8,7 +8,6 @@ public class BlackBoard extends Observable {
     private TspShortestPaths tspShortestPaths;
     private Map<Integer, TspPath> startCityToTsppath;
     private static BlackBoard blackboardInstance;
-    private boolean tspComputing = false;
     
     private BlackBoard() {
     }
@@ -53,13 +52,6 @@ public class BlackBoard extends Observable {
     		tspShortestPaths = new TspShortestPaths();
     	}
     	return tspShortestPaths;
-    }
-    
-    public boolean isTspComputing() {
-    	return tspComputing;
-    }
-    public void setTspComputing(boolean isTspComputing) {
-    	tspComputing = isTspComputing;
     }
     
     public void setShortestTspPaths(TspPath firstShortestPath, TspPath secondShortestPath, TspPath thirdShortestPath) {
