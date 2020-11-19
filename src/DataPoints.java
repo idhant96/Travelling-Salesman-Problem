@@ -8,11 +8,15 @@ public class DataPoints {
 
     }
 
-    public int getDistance() {
+    public int getDistance(int start, int end) {
         return 0;
     }
 
     public int[][] getCoordinates() {
         return null;
+    }
+    
+    public int getLength() {
+    	return coordinates.length;
     }
 }
