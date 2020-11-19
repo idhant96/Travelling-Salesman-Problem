@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class Student implements Runnable{
 	    private boolean running = true;
@@ -60,6 +59,7 @@ public class Student implements Runnable{
 			if (exitFlag) {
 				break;
 			}
+			traversed++;
 		}
 	}
 
