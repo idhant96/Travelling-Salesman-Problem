@@ -42,7 +42,7 @@ public class TspController {
         dataHandler.addCoordinatesToDataPoints(x, y);
     }
 
-    public List<int[]> getDataPoints() {
+    public List<int[]> getCoordinatesDataPoints() {
         TspDataHandler dataHandler = new TspDataHandler();
         return dataHandler.getCoordinatesDataPoints();
     }

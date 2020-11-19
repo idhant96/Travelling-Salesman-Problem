@@ -31,32 +31,32 @@ public class CanvasPanel extends JPanel implements Observer {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if(currentState ==  State.INPUT_STATE) {
-			DataPoints dataPoints = TspController.getInstance().getDataPoints();
+			List<int[]> coordinates = TspController.getInstance().getCoordinatesDataPoints();
 			if(currentState == State.INPUT_STATE) {
-				for(int[] coordinate : dataPoints.coordinates) {
+				for(int[] coordinate : coordinates) {
 					g.setColor(POINTS_COLOR);
 					g.fillOval(coordinate[0], coordinate[1], VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
 				}
 			} else if (currentState == State.OUTPUT_STATE){
 				TspShortestPaths tspShortestPaths = TspController.getInstance().getTspShortestPaths();
-				drawLine(g, tspShortestPaths.getFirstShortestPath(), dataPoints, FIRST_PATH_COLOR);
-				drawLine(g, tspShortestPaths.getSecondShortestPath(), dataPoints, SECOND_PATH_COLOR);
-				drawLine(g, tspShortestPaths.getThirdShortestPath(), dataPoints, THIRD_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getFirstShortestPath(), coordinates, FIRST_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getSecondShortestPath(), coordinates, SECOND_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getThirdShortestPath(), coordinates, THIRD_PATH_COLOR);
 			}
 		}
 	}
 	
-	private void drawLine(Graphics g, TspPath tspPath, DataPoints dataPoints, Color lineColor) {
+	private void drawLine(Graphics g, TspPath tspPath, List<int[]> coordinates, Color lineColor) {
 		List<Integer> cities = tspPath.getPath();
 		for(int i = 1; i < cities.size(); i++) {
 			int city1 = cities.get(i-1);
 			int city2 = cities.get(i);
 			
-			int x1 = dataPoints.coordinates.get(city1)[0];
-			int y1 = dataPoints.coordinates.get(city1)[1];
+			int x1 = coordinates.get(city1)[0];
+			int y1 = coordinates.get(city1)[1];
 			
-			int x2 = dataPoints.coordinates.get(city2)[0];
-			int y2 = dataPoints.coordinates.get(city2)[1];
+			int x2 = coordinates.get(city2)[0];
+			int y2 = coordinates.get(city2)[1];
 			
 			g.setColor(lineColor);
 			g.drawLine(x1 + (VISITED_CITY_PAINT_DIAMETER / 2), y1 + (VISITED_CITY_PAINT_DIAMETER / 2),
@@ -87,7 +87,6 @@ public class CanvasPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("Points added");
 		repaint();
 	}
 	

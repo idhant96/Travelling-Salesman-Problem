@@ -32,10 +32,10 @@ public class OpenActionListener  implements ActionListener {
 				Component child = children[i];
 				if(child instanceof CanvasPanel) {
 					CanvasPanel canvasPanel = (CanvasPanel) child;
+					canvasPanel.setToInputState();
 					int height = canvasPanel.getHeight();
 					int width = canvasPanel.getWidth();
 					TspController.getInstance().loadFile(selectedFile, height, width);
-					canvasPanel.setToInputState();
 				}
 			}
 		}

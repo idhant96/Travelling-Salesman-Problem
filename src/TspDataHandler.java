@@ -168,7 +168,6 @@ public class TspDataHandler {
 //    }
 
     public List<int[]> processSymmetricData(String data) {
-    	System.out.println(data);
         String[] splitData = data.split("xxx");
         String temp = "";
         List<int[]> coordinates = new ArrayList<int[]>();
@@ -188,6 +187,7 @@ public class TspDataHandler {
     }
 
     public void addCoordinatesToDataPoints(int xCoordinate, int yCoordinate) {
+    	System.out.println("Adding coordinate points " + xCoordinate + " " + yCoordinate);
         int[] coordinate = new int[]{xCoordinate, yCoordinate};
         BlackBoard.getInstance().addCoordinatesToDataPoints(coordinate);
     }
