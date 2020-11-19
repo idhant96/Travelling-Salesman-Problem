@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class TspPath implements Comparable<TspPath>{
-	private ArrayList<Integer> path;
+	private List<Integer> path;
 	private int totalDistance;
 	private int startCity;
 	
@@ -11,33 +12,28 @@ public class TspPath implements Comparable<TspPath>{
 		this.totalDistance = 0;
 	}
 	
-	public ArrayList<Integer> getPath() {
-		return this.path;
+	public List<Integer> getPath() {
+		return path;
 	}
 	
-	public void addCityPath(int point) {
+	public void addCityToPath(int point) {
 		this.path.add(point);
 	}
 	
-	public void addDistance(int increment) {
+	public void addDistanceToTotalDistance(int increment) {
 		this.totalDistance += increment;
 	}
 	
 	public int getTotalDistance() {
-		return this.totalDistance;
+		return totalDistance;
 	}
 	
-	
+	public int getStartCity() {
+		return startCity;
+	}
+
 	@Override
 	public int compareTo(TspPath o) {
-//		int distance = this.totalDistance;
-//		if (o.totalDistance < distance) {
-//			return -1;
-//		}
-//		else if (o.totalDistance > distance) {
-//			return 1;
-//		}
-//		return 0;
 		return Integer.compare(this.totalDistance, o.totalDistance);
 	}
 

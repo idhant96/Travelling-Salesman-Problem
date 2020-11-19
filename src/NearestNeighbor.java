@@ -6,20 +6,24 @@ public class NearestNeighbor {
 	
 	
 	public void calculateNextNearestNeighbor(TspPath tspPath) {
-		
 		DataPoints dataPoints = BlackBoard.getInstance().getDatapoints();
-		Set<Integer> visited = new HashSet<>(tspPath.getPath());
-		int lastVisited = tspPath.getPath().get(tspPath.getPath().size()-1);
-		
+		List<Integer> path = tspPath.getPath();
+		Set<Integer> visited = new HashSet<>(path);
+		int lastVisited = path.get(path.size()-1);
+
 		int minDistance = Integer.MAX_VALUE;
 		int minCity = Integer.MAX_VALUE;
-		for(int i = 0 ; i < dataPoints.coordinates.length; i++) {
+		for(int i = 0 ; i < dataPoints.getLength(); i++) {
 			if(visited.contains(i)) {
 				continue;
 			}
+			int distance = dataPoints.getDistance(lastVisited, i);
+			if(distance < minDistance ) {
+				minDistance = distance;
+				minCity = i;
+			}
 		}
-		
-		
+		tspPath.addCityToPath(minCity);
+		tspPath.addDistanceToTotalDistance(minDistance);
 	}
-
 }

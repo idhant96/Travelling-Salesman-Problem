@@ -40,6 +40,9 @@ public class MenuPanel extends JPanel {
 		JMenuItem runMenuItem = new JMenuItem("Run");
 		JMenuItem stopMenuItem = new JMenuItem("Stop");
 		
+		
+		runMenuItem.addActionListener(new RunActionListener());
+		
 		projectMenu.add(newMenuItem);
 		projectMenu.add(runMenuItem);
 		projectMenu.add(stopMenuItem);
