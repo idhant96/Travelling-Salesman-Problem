@@ -6,17 +6,13 @@ import java.util.Observable;
 public class BlackBoard extends Observable {
     DataPoints datapoints;
     TspShortestPaths tspShortestPaths;
-    Map<Integer, TspPath> startToTsppath = new HashMap<Integer, TspPath>();
+    Map<Integer, TspPath> startToTspPath = new HashMap<Integer, TspPath>();
+    static BlackBoard blackBoardObj = null;
 
     private BlackBoard() {
-
     }
 
-    public BlackBoard getBlackBoardInstance() {
-        return null;
-    }
-
-    public void addCoordinatesToDataPoints() {
+    public void addCoordinatesToDataPoints(List<int[]> coordinatesData) {
 
     }
 

@@ -1,13 +1,15 @@
-public class DataPoints {
-    int[][] coordinates;
+import java.util.ArrayList;
+import java.util.List;
 
-    public void addCityCoordinates(int[][] newCoordinates) {
+public class DataPoints {
+    List<int[]> coordinates = new ArrayList<int[]>();
+
+    public void addCityCoordinates(int[] newCoordinates) {
 
     }
 
     public int getDistance() {
         return 0;
-
     }
 
     public int[][] getCoordinates() {
