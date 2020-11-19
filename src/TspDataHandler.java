@@ -182,7 +182,7 @@ public class TspDataHandler {
         List<int[]> coordinates = new ArrayList<int[]>();
 
         String[] currentCoordinate;
-        for (int i = 2; i < splitData.length; i++) {
+        for (int i = 0; i < splitData.length; i++) {
             int[] coordinateCurrent = new int[2];
             if (!splitData[i].contains("EOF")) {
                 currentCoordinate = splitData[i].split(" ");
