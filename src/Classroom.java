@@ -35,10 +35,13 @@ public class Classroom {
 				student = students.get(i);
 				student.stopCompute();			}
 		}
-		
 		students.clear();
 		professor.stopCompute();
 		professor = null;
+	}
+	
+	public void cleanSlate() {
+		stop();
 	}
 	
 	
