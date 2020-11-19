@@ -54,11 +54,17 @@ public class Student implements Runnable{
 				nearestNeaighbour.calculateNextNearestNeighbor(tspPath);
 				System.out.println(tspPath.getPath());
 				temp++;
+				
 				try {
 					Thread.sleep(1000);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
+			
+			}
+			blackboard.setStudentRunStatus(threadNumber, false);
+			while (continueCompute()  && !blackboard.getRunStatusForStudent(threadNumber)){
+				
 			}
 			if (exitFlag) {
 				break;
