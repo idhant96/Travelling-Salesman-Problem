@@ -3,8 +3,6 @@ import java.util.Map;
 
 public class Student implements Runnable{
 	    private boolean running = false;
-//	    private BlackBoard blackboard;
-//	    private Map<Integer, TspPath> path;
 	    private int threadNumber, totalThreads;
 
 
@@ -25,12 +23,12 @@ public class Student implements Runnable{
 	    }
 	@Override
 	public void run() {
-		int start, end, datapointsSize, div;
-		Map<Integer, TspPath> path;
-		BlackBoard blackboard;
-		blackboard = BlackBoard.getInstance();
-    	datapointsSize = blackboard.getDatapointsSize();
-		datapointsSize = 100;
+		BlackBoard blackboard = BlackBoard.getInstance();
+		boolean exitFlag=false;
+		TspPath tspPath;
+		NearestNeighbor nearestNeaighbour = new NearestNeighbor();
+		int start, end, datapointsSize, div, temp, traversed=0;
+    	datapointsSize = blackboard.getDatapoints().getLength();
     	div = Math.round(datapointsSize/totalThreads);
     	if (threadNumber == totalThreads) {
 //    		System.out.println("this is last thread" + threadNumber);
@@ -42,23 +40,30 @@ public class Student implements Runnable{
 	    	end = div * threadNumber;
 	    	start = end - div + 1;
     	}
-//		int temp = start;
-//		TspPath tspPath;
-//		path = blackboard.startCityToTsppath;
-//		/**
-//		 * will mod once blackboard ready
-//		 */
-//		while (continueCompute()) {
-//			tspPath = blackboard.getTspPathForStartCity();
-//			if (tspPath == null) {
-//				
-//			}
-//			while (start <= ) {
-////				System.out.println(start); 
-////				start +=1;
-//			}
-////			break;
-//		}
+		temp = start;
+		
+		while (traversed < datapointsSize) {
+			temp = start;
+			while (temp <= end) {
+				if (!continueCompute()) {
+					exitFlag= true;
+					break;
+				}
+				tspPath = blackboard.getTspPathForStartCity(start);
+				if (tspPath != null) {
+					nearestNeaighbour.calculateNextNearestNeighbor(tspPath);
+				}
+				else {
+					tspPath = new TspPath(temp);
+					blackboard.addTspPathForStartCity(tspPath);
+				}
+				
+				temp++;
+			}
+			if (exitFlag) {
+				break;
+			}
+		}
 	}
 
 }
