@@ -17,6 +17,6 @@ public class DataPoints {
     }
     
     public int getLength() {
-    	return coordinates.length;
+    	return coordinates.size();
     }
 }

@@ -15,11 +15,11 @@ public class TspPath implements Comparable<TspPath>{
 		return this.path;
 	}
 	
-	public void addCityPath(int point) {
+	public void addCityToPath(int point) {
 		this.path.add(point);
 	}
 	
-	public void addDistance(int increment) {
+	public void addDistanceToTotalDistance(int increment) {
 		this.totalDistance += increment;
 	}
 	
