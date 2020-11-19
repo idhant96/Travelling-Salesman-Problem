@@ -27,6 +27,7 @@ public class BlackBoard extends Observable {
     public void cleanSlate() {
         datapoints = null;
         tspShortestPaths = null;
+
     }
 
     public TspPath getTspPathForStartCity(int startCity) {

@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.List;
 import java.util.Observer;
 
 public class TspController {
@@ -22,7 +23,7 @@ public class TspController {
 
     public void saveFile(File filePath) {
         TspDataHandler dataHandler = new TspDataHandler();
-         dataHandler.saveFile(filePath);
+        dataHandler.saveFile(filePath);
     }
 
     public void start() {
@@ -42,8 +43,9 @@ public class TspController {
         dataHandler.addCoordinatesToDataPoints(x, y);
     }
 
-    public DataPoints getDataPoints() {
-        return BlackBoard.getInstance().getDatapoints();
+    public List<int[]> getDataPoints() {
+        TspDataHandler dataHandler = new TspDataHandler();
+        return dataHandler.getCoordinatesDataPoints();
     }
 
     public TspShortestPaths getTspShortestPaths() {

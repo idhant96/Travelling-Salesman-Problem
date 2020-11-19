@@ -9,7 +9,6 @@ public class TspDataHandler {
         String rawTspData = readDataFromPath(fileObj);
         List<int[]> processedTspData = processSymmetricData(rawTspData);
         List<int[]> scaledTspData = normalizeCoordinates(processedTspData, screenHeight, screenWidth);
-
         for (int[] coordinate : scaledTspData) {
             addCoordinatesToDataPoints(coordinate[0], coordinate[1]);
         }
@@ -191,6 +190,10 @@ public class TspDataHandler {
     public void addCoordinatesToDataPoints(int xCoordinate, int yCoordinate) {
         int[] coordinate = new int[]{xCoordinate, yCoordinate};
         BlackBoard.getInstance().addCoordinatesToDataPoints(coordinate);
+    }
+
+    public List<int[]> getCoordinatesDataPoints() {
+        return BlackBoard.getInstance().getDatapoints().coordinates;
     }
 
 
