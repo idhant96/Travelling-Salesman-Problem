@@ -21,8 +21,8 @@ public class BlackBoard extends Observable {
 
     }
 
-    public void getTspShortestPaths() {
-
+    public TspShortestPaths getTspShortestPaths() {
+    	return tspShortestPaths;
     }
 
     public void cleanSlate() {
@@ -39,7 +39,27 @@ public class BlackBoard extends Observable {
     }
 
     public void update() {
-
+    	setChanged();
+    	notifyObservers();
+    }
+    
+    public Map<Integer, TspPath> getStartCityToTsppath() {
+    	return startCityToTsppath;
+    }
+    
+    public TspShortestPaths getTspShortestPath() {
+    	if(tspShortestPaths == null) {
+    		tspShortestPaths = new TspShortestPaths();
+    	}
+    	return tspShortestPaths;
+    }
+    
+    public void setShortestTspPaths(TspPath firstShortestPath, TspPath secondShortestPath, TspPath thirdShortestPath) {
+    	TspShortestPaths tspShortestPaths =  getTspShortestPath();
+    	tspShortestPaths.setFirstShortestPath(firstShortestPath);
+    	tspShortestPaths.setSecondShortestPath(secondShortestPath);
+    	tspShortestPaths.setThirdShortestPath(thirdShortestPath);
+    	update();
     }
 
     public static BlackBoard getInstance() {
@@ -48,5 +68,6 @@ public class BlackBoard extends Observable {
     	}
     	return blackboardInstance;
     }
+
 
 }
