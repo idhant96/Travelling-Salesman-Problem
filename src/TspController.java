@@ -22,7 +22,7 @@ public class TspController {
 
     public void saveFile(File filePath) {
         TspDataHandler dataHandler = new TspDataHandler();
-        // dataHandler.saveFile(filePath);
+         dataHandler.saveFile(filePath);
     }
 
     public void start() {

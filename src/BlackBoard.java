@@ -53,6 +53,7 @@ public class BlackBoard extends Observable {
 
     }
 
+
     public void update() {
         setChanged();
         notifyObservers();
