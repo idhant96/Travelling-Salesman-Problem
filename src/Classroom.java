@@ -5,7 +5,6 @@ public class Classroom {
 	private ArrayList<Thread> studentThreads;
 	private ArrayList<Student> students;
 	private Professor professor;
-	private Thread professorThread;
 	
 	private void prepareThreads() {
 		if (studentThreads == null) {
@@ -18,10 +17,6 @@ public class Classroom {
 				studentThreads.add(new Thread(student));
 			}
 		}
-		if (professorThread == null) {
-			professor = new Professor();
-			professorThread = new Thread(professor);
-		} 
 	}
 	
 	
@@ -35,8 +30,11 @@ public class Classroom {
 			student.startCompute();
 			tempThread.start();
 		}
-		professor.startCompute();
-		professorThread.start();
+		if (professor == null) {
+			professor = new Professor();
+		}
+		Thread professorThread = new Thread(professor);
+		professorThread.run();
 	}
 	
 //	public void pause() {

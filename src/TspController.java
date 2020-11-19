@@ -24,13 +24,24 @@ public class TspController {
 	}
 	
 	public void start() {
-		
+		classroom.start();
 	}
 	
 	public void stop() {
-		
+		classroom.stop();
 	}
 	
+	public boolean isTspComputing() {
+		return BlackBoard.getInstance().isTspComputing();
+	}
+	
+	public DataPoints getDataPoints() {
+		return BlackBoard.getInstance().getDatapoints();
+	}
+	
+	public TspShortestPaths getTspShortestPaths() {
+		return BlackBoard.getInstance().getTspShortestPaths();
+	}
 	public static TspController getInstance() {
 		if(controllerInstance == null) {
 			controllerInstance = new TspController();
