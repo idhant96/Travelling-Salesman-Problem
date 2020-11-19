@@ -55,16 +55,21 @@ public class Student implements Runnable{
 				System.out.println(tspPath.getPath());
 				temp++;
 				
-				try {
-					Thread.sleep(1000);
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(1000);
+//				} catch(Exception e) {
+//					e.printStackTrace();
+//				}
 			
 			}
 			blackboard.setStudentRunStatus(threadNumber, false);
 			while (continueCompute()  && !blackboard.getRunStatusForStudent(threadNumber)){
-				
+				System.out.println("Student going to sleep for " + threadNumber);
+				try {
+					Thread.sleep(5000);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
 			}
 			if (exitFlag) {
 				break;

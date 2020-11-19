@@ -4,8 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 public class DataPoints {
-    List<int[]> coordinates = new ArrayList<int[]>();
-    Map<String, Integer> shortestDistancesAtoB = new HashMap<String, Integer>();
+    List<int[]> coordinates;
+    Map<String, Integer> shortestDistancesAtoB;
+    
+    DataPoints(){
+    	coordinates = new ArrayList<int[]>();
+    	shortestDistancesAtoB = new HashMap<String, Integer>();
+    }
 
     public void addCityCoordinates(int[] coordinate) {
         coordinates.add(coordinate);

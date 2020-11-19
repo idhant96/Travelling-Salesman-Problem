@@ -97,19 +97,30 @@ public class BlackBoard extends Observable {
     }
     
     public boolean canProfessorRun() {
+    	if(studentRunStatus == null) {
+    		studentRunStatus = new HashMap<>();
+    	}
+    	boolean canProfessorRun = false;
     	for(Integer studentNumber : studentRunStatus.keySet()) {
     		if(studentRunStatus.get(studentNumber)) {
     			return false;
     		}
+    		canProfessorRun = true;
     	}
-    	return true;
+    	return canProfessorRun;
     }
     
     public void setStudentRunStatus(int studentNumber, boolean status) {
+    	if(studentRunStatus == null) {
+    		studentRunStatus = new HashMap<>();
+    	}
     	studentRunStatus.put(studentNumber, status);
     }
     
     public void setAllStudentStatusToTrue() {
+    	if(studentRunStatus == null) {
+    		studentRunStatus = new HashMap<>();
+    	}
     	for(Integer studentNumber : studentRunStatus.keySet()) {
     		studentRunStatus.put(studentNumber, true);
     	}
