@@ -12,8 +12,12 @@ public class Student implements Runnable {
 		this.running = false;
 	}
 
-	private synchronized boolean continueCompute() {
+	private boolean continueCompute() {
 		return this.running == true;
+	}
+	
+	public boolean isRunning() {
+		return running;
 	}
 
 	@Override
@@ -34,12 +38,10 @@ public class Student implements Runnable {
 			end = div * threadNumber;
 			start = end - div + 1;
 		}
-		start += 1;
-		end -= 1;
+		start = start-1;
+		end = end - 1;
 		temp = start;
-		System.out.println("Thread number " + threadNumber + " start: " + start + " end: " + end);
 		while (temp <= end) {
-//			System.out.println("Thread number " + threadNumber + " CurrCity: " + temp);
 			if (!continueCompute()) {
 				break;
 			}
@@ -48,6 +50,9 @@ public class Student implements Runnable {
 				tspPath = new TspPath(temp);
 				tspPath.addCityToPath(temp);
 				blackboard.addTspPathForStartCity(tspPath);
+			}
+			if(tspPath.getPath().size() == datapointsSize) {
+				running = false;
 			}
 			nearestNeaighbour.calculateNextNearestNeighbor(tspPath);
 			temp++;
@@ -58,6 +63,7 @@ public class Student implements Runnable {
 			}
 
 		}
+		
 	}
 
 }

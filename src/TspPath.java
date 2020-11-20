@@ -36,5 +36,10 @@ public class TspPath implements Comparable<TspPath>{
 	public int compareTo(TspPath o) {
 		return Integer.compare(this.totalDistance, o.totalDistance);
 	}
+	
+	
+	public String toString() {
+		return path.toString();
+	}
 
 }

@@ -14,10 +14,9 @@ public class Classroom implements Runnable {
 			while (running) {
 				System.out.println("---------------------");
 				students = new ArrayList<>();
-				Student student;
 				List<Thread> threads = new ArrayList<>();
 				for (int i = 1; i <= studentCount; i++) {
-					student = new Student(i, studentCount);
+					Student student = new Student(i, studentCount);
 					students.add(student);
 					Thread studentThread = new Thread(student);
 					threads.add(studentThread);
@@ -31,7 +30,17 @@ public class Classroom implements Runnable {
 				Thread professorThread = new Thread(professor);
 				professorThread.start(); 
 				professorThread.join();
+				boolean allCompleted = true;
+				for(Student student : students) {
+					if(student.isRunning()) {
+						allCompleted = false;
+					}
+				}
+				if(allCompleted) {
+					running = false;
+				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

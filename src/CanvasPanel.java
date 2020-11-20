@@ -1,6 +1,8 @@
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -12,7 +14,7 @@ public class CanvasPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 6981842796760492347L;
 	private static final int VISITED_CITY_PAINT_DIAMETER= 5;
 	private static final Color FIRST_PATH_COLOR = Color.RED;
-	private static final Color SECOND_PATH_COLOR = Color.PINK;
+	private static final Color SECOND_PATH_COLOR = Color.GREEN;
 	private static final Color THIRD_PATH_COLOR = Color.ORANGE;
 	private static final Color POINTS_COLOR = Color.BLUE;
 	private State currentState;;
@@ -39,16 +41,23 @@ public class CanvasPanel extends JPanel implements Observer {
 					g.fillOval(coordinate[0], coordinate[1], VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
 				}
 			} else if (currentState == State.OUTPUT_STATE){
-				System.out.println("OutputState");
+				for(int[] coordinate : coordinates) {
+					g.setColor(POINTS_COLOR);
+					g.fillOval(coordinate[0], coordinate[1], VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
+				}
 				TspShortestPaths tspShortestPaths = TspController.getInstance().getTspShortestPaths();
-				drawLine(g, tspShortestPaths.getFirstShortestPath(), coordinates, FIRST_PATH_COLOR);
-				drawLine(g, tspShortestPaths.getSecondShortestPath(), coordinates, SECOND_PATH_COLOR);
-				drawLine(g, tspShortestPaths.getThirdShortestPath(), coordinates, THIRD_PATH_COLOR);
+				System.out.println(tspShortestPaths.getFirstShortestPath());
+				System.out.println(tspShortestPaths.getSecondShortestPath());
+				System.out.println(tspShortestPaths.getThirdShortestPath());
+				drawLine(g, tspShortestPaths.getThirdShortestPath(), coordinates, 30,THIRD_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getSecondShortestPath(), coordinates,20, SECOND_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getFirstShortestPath(), coordinates,10,  FIRST_PATH_COLOR);
+
 			}
 		}
 	}
 	
-	private void drawLine(Graphics g, TspPath tspPath, List<int[]> coordinates, Color lineColor) {
+	private void drawLine(Graphics g, TspPath tspPath, List<int[]> coordinates, int stroke, Color lineColor) {
 		List<Integer> cities = tspPath.getPath();
 		for(int i = 1; i < cities.size(); i++) {
 			int city1 = cities.get(i-1);
@@ -59,16 +68,17 @@ public class CanvasPanel extends JPanel implements Observer {
 			
 			int x2 = coordinates.get(city2)[0];
 			int y2 = coordinates.get(city2)[1];
-			
-			g.setColor(lineColor);
-			g.drawLine(x1 + (VISITED_CITY_PAINT_DIAMETER / 2), y1 + (VISITED_CITY_PAINT_DIAMETER / 2),
+			Graphics2D g2 = (Graphics2D) g;
+			g2.setStroke(new BasicStroke(stroke));
+			g2.setColor(lineColor);
+			g2.drawLine(x1 + (VISITED_CITY_PAINT_DIAMETER / 2), y1 + (VISITED_CITY_PAINT_DIAMETER / 2),
 					x2 + (VISITED_CITY_PAINT_DIAMETER / 2), y2 + (VISITED_CITY_PAINT_DIAMETER / 2));
 
-			g.setColor(POINTS_COLOR);
-			g.fillOval(x1, y1, VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
+			g2.setColor(POINTS_COLOR);
+			g2.fillOval(x1, y1, VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
 
-			g.setColor(POINTS_COLOR);
-			g.fillOval(x2, y2, VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
+			g2.setColor(POINTS_COLOR);
+			g2.fillOval(x2, y2, VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
 		}
 	}
 	
