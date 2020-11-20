@@ -25,11 +25,12 @@ public class Student implements Runnable {
 		BlackBoard blackboard = BlackBoard.getInstance();
 		TspPath tspPath;
 
-		NearestNeighbor nearestNeaighbour = new NearestNeighbor();
+		NearestNeighbor nearestNeighbour = new NearestNeighbor();
 		int start, end, datapointsSize, div, temp;
 		datapointsSize = blackboard.getDatapoints().getLength();
+		System.out.println("dp size : " +datapointsSize);
 		div = Math.round(datapointsSize / totalThreads);
-		if (threadNumber == totalThreads-1) {
+		if (threadNumber == totalThreads) {
 //    		System.out.println("this is last thread" + threadNumber);
 			end = datapointsSize;
 			start = (div * (threadNumber - 1)) + 1;
@@ -40,6 +41,9 @@ public class Student implements Runnable {
 		}
 		start = start-1;
 		end = end - 1;
+		System.out.println("Student thread number: "+this.threadNumber);
+		System.out.println("start city index: "+start);
+		System.out.println("end city index: "+end);
 		temp = start;
 		while (temp <= end) {
 			if (!continueCompute()) {
@@ -51,10 +55,13 @@ public class Student implements Runnable {
 				tspPath.addCityToPath(temp);
 				blackboard.addTspPathForStartCity(tspPath);
 			}
-			if(tspPath.getPath().size() == datapointsSize) {
+			System.out.println("Tsp Path size : "+ tspPath.getPath().size());
+			System.out.println("Data point size : "+ datapointsSize);
+
+			if(tspPath.getPath().size() >= datapointsSize) {
 				running = false;
 			}
-			nearestNeaighbour.calculateNextNearestNeighbor(tspPath);
+			nearestNeighbour.calculateNextNearestNeighbor(tspPath);
 			temp++;
 			try {
 				Thread.sleep(100);

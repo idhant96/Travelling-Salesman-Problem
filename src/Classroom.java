@@ -9,6 +9,7 @@ public class Classroom implements Runnable {
 	private boolean running;
 
 	public void run() {
+		System.out.println("classroom thread started");
 		running = true;
 		try {
 			while (running) {
