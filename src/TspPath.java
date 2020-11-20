@@ -39,7 +39,7 @@ public class TspPath implements Comparable<TspPath>{
 	
 	
 	public String toString() {
-		return path.toString();
+		return "TotalDistance: " + totalDistance + " " + path.toString();
 	}
 
 }

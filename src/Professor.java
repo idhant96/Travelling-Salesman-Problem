@@ -22,6 +22,7 @@ public class Professor implements Runnable {
 		}
 		System.out.println(paths.size());
 		Collections.sort(paths);
+		System.out.println(paths);
 		if(paths.size() >= 3) {
 			System.out.println("Notifying UI");
 			BlackBoard.getInstance().setShortestTspPaths(paths.get(0), paths.get(1), paths.get(2));	

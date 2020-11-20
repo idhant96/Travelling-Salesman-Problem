@@ -20,7 +20,7 @@ public class NearestNeighbor {
 			if(visited.contains(i)) {
 				continue;
 			}
-			int distance = dataPoints.getDistance(lastVisited, i);
+			int distance = dataPoints.getDistance(lastVisited, i); 
 			if(distance < minDistance ) {
 				minDistance = distance;
 				minCity = i;
@@ -28,5 +28,9 @@ public class NearestNeighbor {
 		}
 		tspPath.addCityToPath(minCity);
 		tspPath.addDistanceToTotalDistance(minDistance);
+		if(tspPath.getPath().size() == dataPoints.getLength()) {
+			tspPath.addCityToPath(tspPath.getStartCity());
+			tspPath.addDistanceToTotalDistance(dataPoints.getDistance(lastVisited, tspPath.getStartCity()));
+		}
 	}
 }
