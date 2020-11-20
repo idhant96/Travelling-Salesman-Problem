@@ -19,6 +19,10 @@ public class TspPath implements Comparable<TspPath>{
 	public void addCityToPath(int point) {
 		this.path.add(point);
 	}
+
+	public void setTotalDistance(int totalDistance){
+		this.totalDistance = totalDistance;
+	}
 	
 	public void addDistanceToTotalDistance(int increment) {
 		this.totalDistance += increment;
@@ -39,7 +43,7 @@ public class TspPath implements Comparable<TspPath>{
 	
 	
 	public String toString() {
-		return "TotalDistance: " + totalDistance + " " + path.toString();
+		return "TotalDistance: " + totalDistance + " ["+ path.size() + "] " + path.toString();
 	}
 
 }

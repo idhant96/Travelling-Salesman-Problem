@@ -20,17 +20,18 @@ public class Professor implements Runnable {
 			TspPath cloned = deepClone(startCityToTspPath.get(startCity));
 			paths.add(cloned);
 		}
-		System.out.println(paths.size());
+		//System.out.println(paths.size());
 		Collections.sort(paths);
-		System.out.println(paths);
+		//System.out.println(paths);
 		if(paths.size() >= 3) {
-			System.out.println("Notifying UI");
+			//System.out.println("Notifying UI");
 			BlackBoard.getInstance().setShortestTspPaths(paths.get(0), paths.get(1), paths.get(2));	
 		}
 	}
 
 	public static TspPath deepClone(TspPath tspPath) {
 		TspPath clone = new TspPath(tspPath.getStartCity());
+		clone.setTotalDistance(tspPath.getTotalDistance());
 		List<Integer> path = new ArrayList<>(tspPath.getPath());
 		for(int city : path) {
 			clone.addCityToPath(city);

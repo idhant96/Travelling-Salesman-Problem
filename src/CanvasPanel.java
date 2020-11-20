@@ -14,8 +14,8 @@ public class CanvasPanel extends JPanel implements Observer {
 	private static final long serialVersionUID = 6981842796760492347L;
 	private static final int VISITED_CITY_PAINT_DIAMETER= 5;
 	private static final Color FIRST_PATH_COLOR = Color.RED;
-	private static final Color SECOND_PATH_COLOR = Color.GREEN;
-	private static final Color THIRD_PATH_COLOR = Color.ORANGE;
+	private static final Color SECOND_PATH_COLOR = Color.PINK;
+	private static final Color THIRD_PATH_COLOR = Color.GRAY;
 	private static final Color POINTS_COLOR = Color.BLUE;
 	private State currentState;;
 	
@@ -49,9 +49,9 @@ public class CanvasPanel extends JPanel implements Observer {
 				System.out.println(tspShortestPaths.getFirstShortestPath());
 				System.out.println(tspShortestPaths.getSecondShortestPath());
 				System.out.println(tspShortestPaths.getThirdShortestPath());
-				drawLine(g, tspShortestPaths.getThirdShortestPath(), coordinates, 30,THIRD_PATH_COLOR);
-				drawLine(g, tspShortestPaths.getSecondShortestPath(), coordinates,20, SECOND_PATH_COLOR);
-				drawLine(g, tspShortestPaths.getFirstShortestPath(), coordinates,10,  FIRST_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getThirdShortestPath(), coordinates, 15,THIRD_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getSecondShortestPath(), coordinates,10, SECOND_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getFirstShortestPath(), coordinates,5,  FIRST_PATH_COLOR);
 
 			}
 		}

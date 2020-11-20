@@ -29,7 +29,6 @@ public class NearestNeighbor {
         if (minDistance != Integer.MAX_VALUE && minCity != Integer.MAX_VALUE) {
             tspPath.addCityToPath(minCity);
             tspPath.addDistanceToTotalDistance(minDistance);
-
         }
 
 
