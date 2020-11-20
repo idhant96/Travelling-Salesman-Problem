@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Classroom implements Runnable {
-	private int studentCount = 1;
+	private int studentCount = 5;
 	private List<Student> students;
 	private Professor professor;
 

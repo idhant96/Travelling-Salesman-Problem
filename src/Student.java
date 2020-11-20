@@ -25,7 +25,7 @@ public class Student implements Runnable {
 		int start, end, datapointsSize, div, temp;
 		datapointsSize = blackboard.getDatapoints().getLength();
 		div = Math.round(datapointsSize / totalThreads);
-		if (threadNumber == totalThreads) {
+		if (threadNumber == totalThreads-1) {
 //    		System.out.println("this is last thread" + threadNumber);
 			end = datapointsSize;
 			start = (div * (threadNumber - 1)) + 1;
@@ -34,6 +34,8 @@ public class Student implements Runnable {
 			end = div * threadNumber;
 			start = end - div + 1;
 		}
+		start += 1;
+		end -= 1;
 		temp = start;
 		System.out.println("Thread number " + threadNumber + " start: " + start + " end: " + end);
 		while (temp <= end) {
@@ -41,7 +43,7 @@ public class Student implements Runnable {
 			if (!continueCompute()) {
 				break;
 			}
-			tspPath = blackboard.getTspPathForStartCity(start);
+			tspPath = blackboard.getTspPathForStartCity(temp);
 			if (tspPath == null) {
 				tspPath = new TspPath(temp);
 				tspPath.addCityToPath(temp);

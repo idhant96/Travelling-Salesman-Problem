@@ -27,6 +27,9 @@ public class BlackBoard extends Observable {
     }
 
     public TspShortestPaths getTspShortestPaths() {
+    	if(tspShortestPaths == null) {
+    		tspShortestPaths = new TspShortestPaths();
+    	}
         return tspShortestPaths;
     }
 

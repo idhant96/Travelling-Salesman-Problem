@@ -30,7 +30,7 @@ public class CanvasPanel extends JPanel implements Observer {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		if(currentState ==  State.INPUT_STATE) {
+		if(currentState !=  State.INIT_STATE) {
 			List<int[]> coordinates = TspController.getInstance().getCoordinatesDataPoints();
 			System.out.println("State is " + currentState);
 			if(currentState == State.INPUT_STATE) {
