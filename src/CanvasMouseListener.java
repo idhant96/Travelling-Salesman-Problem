@@ -1,19 +1,16 @@
-import java.awt.Component;
-import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 
 public class CanvasMouseListener implements MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		CanvasPanel canvasPanel = (CanvasPanel)e.getSource();
+		if(canvasPanel.inOutputState()) {
+			return;
+		}
 		int x = e.getX();
 		int y = e.getY();
-		CanvasPanel canvasPanel = (CanvasPanel)e.getSource();
 		canvasPanel.setToInputState();
 		TspController.getInstance().addCoordinatesToDataPoints(x, y);
 	}

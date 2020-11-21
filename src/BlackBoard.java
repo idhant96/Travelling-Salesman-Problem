@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
@@ -9,7 +7,6 @@ public class BlackBoard extends Observable {
     private TspShortestPaths tspShortestPaths;
     private Map<Integer, TspPath> startCityToTspPath;
     private static BlackBoard blackboardInstance;
-    private Map<Integer, Boolean> studentRunStatus;
 
     private BlackBoard() {
     }
@@ -36,6 +33,7 @@ public class BlackBoard extends Observable {
     public void cleanSlate() {
         datapoints = null;
         tspShortestPaths = null;
+        startCityToTspPath = null;
 
     }
 

@@ -16,6 +16,7 @@ public class NewActionListener implements ActionListener {
 		TspController.getInstance().cleanSlate();
 		MenuPanel menuPanel = getSourcePanel(e);
 		menuPanel.getCanvasPanel().setToInputState();
+		menuPanel.getCanvasPanel().clean();
 	}
 
 	public MenuPanel getSourcePanel(ActionEvent e){

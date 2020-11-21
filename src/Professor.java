@@ -5,26 +5,16 @@ import java.util.Map;
 
 public class Professor implements Runnable {
 
-	private boolean running = true;
-
-	public void stopCompute() {
-		running = false;
-	}
-
 	@Override
 	public void run() {
-		System.out.println("Proff running");
 		Map<Integer, TspPath> startCityToTspPath = BlackBoard.getInstance().getStartCityToTsppath();
 		List<TspPath> paths = new ArrayList<>();
 		for(Integer startCity : startCityToTspPath.keySet()) {
 			TspPath cloned = deepClone(startCityToTspPath.get(startCity));
 			paths.add(cloned);
 		}
-		//System.out.println(paths.size());
 		Collections.sort(paths);
-		//System.out.println(paths);
 		if(paths.size() >= 3) {
-			//System.out.println("Notifying UI");
 			BlackBoard.getInstance().setShortestTspPaths(paths.get(0), paths.get(1), paths.get(2));	
 		}
 	}

@@ -34,7 +34,9 @@ public class CanvasPanel extends JPanel implements Observer {
 		super.paintComponent(g);
 		if(currentState !=  State.INIT_STATE) {
 			List<int[]> coordinates = TspController.getInstance().getCoordinatesDataPoints();
-			System.out.println("State is " + currentState);
+			if(coordinates == null) {
+				return;
+			}
 			if(currentState == State.INPUT_STATE) {
 				for(int[] coordinate : coordinates) {
 					g.setColor(POINTS_COLOR);
@@ -46,9 +48,6 @@ public class CanvasPanel extends JPanel implements Observer {
 					g.fillOval(coordinate[0], coordinate[1], VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
 				}
 				TspShortestPaths tspShortestPaths = TspController.getInstance().getTspShortestPaths();
-				System.out.println(tspShortestPaths.getFirstShortestPath());
-				System.out.println(tspShortestPaths.getSecondShortestPath());
-				System.out.println(tspShortestPaths.getThirdShortestPath());
 				drawLine(g, tspShortestPaths.getThirdShortestPath(), coordinates, 15,THIRD_PATH_COLOR);
 				drawLine(g, tspShortestPaths.getSecondShortestPath(), coordinates,10, SECOND_PATH_COLOR);
 				drawLine(g, tspShortestPaths.getFirstShortestPath(), coordinates,5,  FIRST_PATH_COLOR);
@@ -90,6 +89,17 @@ public class CanvasPanel extends JPanel implements Observer {
 		currentState = State.OUTPUT_STATE;
 	}
 	
+	public State getState() {
+		return currentState;
+	}
+
+	public void clean() {
+		repaint();
+	}
+	public boolean inOutputState() {
+		return currentState == State.OUTPUT_STATE;
+	}
+	
 	enum State {
 		INIT_STATE,
 		INPUT_STATE,
@@ -99,7 +109,6 @@ public class CanvasPanel extends JPanel implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		System.out.println("Update");
 		repaint();
 	}
 	

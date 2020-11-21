@@ -199,7 +199,11 @@ public class TspDataHandler {
     }
 
     public List<int[]> getCoordinatesDataPoints() {
-        return BlackBoard.getInstance().getDatapoints().coordinates;
+    	DataPoints dataPoints = BlackBoard.getInstance().getDatapoints();
+    	if(dataPoints == null) {
+    		return null;
+    	}
+        return dataPoints.coordinates;
     }
 
 
