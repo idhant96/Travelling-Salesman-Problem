@@ -39,7 +39,7 @@ public class TspController {
     }
 
     public void cleanSlate() {
-    	classroom = new Classroom();
+    	classroom = null;
         BlackBoard.getInstance().cleanSlate();
     }
 

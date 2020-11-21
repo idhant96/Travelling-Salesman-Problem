@@ -1,8 +1,12 @@
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 
 public class SaveActionListener  implements ActionListener {
 
@@ -11,13 +15,22 @@ public class SaveActionListener  implements ActionListener {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Specify file to save");   
 		 
-		int userSelection = fileChooser.showSaveDialog((MenuPanel)e.getSource());
-		 
+		int userSelection = fileChooser.showSaveDialog(getSourcePanel(e));
+		System.out.println("User Selection: " + userSelection);
 		if (userSelection == JFileChooser.APPROVE_OPTION) {
 		    File fileToSave = fileChooser.getSelectedFile();
 		    TspController.getInstance().saveFile(fileToSave);
 		}
 		
+	}
+	
+	public MenuPanel getSourcePanel(ActionEvent e){
+		JMenuItem menuItem = (JMenuItem) e.getSource(); 
+		JPopupMenu popupMenu = (JPopupMenu) menuItem.getParent(); 
+		Component invoker = popupMenu.getInvoker();
+		JMenuBar bar = (JMenuBar)invoker.getParent();
+		MenuPanel menuPanel = (MenuPanel) bar.getParent();
+		return menuPanel;
 	}
 
 }

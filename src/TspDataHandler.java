@@ -16,15 +16,18 @@ public class TspDataHandler {
     }
 
 
-    public void saveFile(File fileObj) {
-        DataPoints dataCoordinates = BlackBoard.getInstance().getDatapoints();
-        String fileContent = formatFileSaveContent(dataCoordinates.coordinates);
+    public void saveFile(File file) {
+        DataPoints dataPoints = BlackBoard.getInstance().getDatapoints();
+        if(dataPoints == null) {
+        	dataPoints = new DataPoints();
+        }
+        String fileContent = formatFileSaveContent(dataPoints.coordinates);
+        System.out.println("file content is " + fileContent);
         try {
-            File file = fileObj;
             if (!file.exists()) {
                 file.createNewFile();
             }
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
+            FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(fileContent);
             bw.close();

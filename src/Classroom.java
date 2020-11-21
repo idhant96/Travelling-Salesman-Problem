@@ -21,9 +21,6 @@ public class Classroom implements Runnable {
 				for (int i = 1; i <= studentCount; i++) {
 					Student student = new Student(i, studentCount);
 					students.add(student);
-//					Thread studentThread = new Thread(student);
-//					threads.add(studentThread);
-//					studentThread.start();
 					Future f = fixedPool.submit(student);
 					futures.add(f);
 					
@@ -44,6 +41,7 @@ public class Classroom implements Runnable {
 				students.clear();
 				if(allCompleted) {
 					running = false;
+					
 				}
 			}
 			
@@ -67,5 +65,8 @@ public class Classroom implements Runnable {
 		students = null;
 		professor = null;
 	}
-
 }
+
+
+
+
