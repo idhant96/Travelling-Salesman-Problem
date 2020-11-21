@@ -2,6 +2,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
+/**
+ * A singleton class to maintain all the data/datastructures used in this applicaton.
+ *
+ */
 public class BlackBoard extends Observable {
     private DataPoints datapoints;
     private TspShortestPaths tspShortestPaths;

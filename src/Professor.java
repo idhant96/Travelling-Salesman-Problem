@@ -3,8 +3,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * Runnable class for 3 shorted paths after every nearest neighbour in each thread is calculated.
+ *
+ */
 public class Professor implements Runnable {
 
+	/**
+	 * Invokes TspPath sort  and stores three shortest paths.
+	 */
 	@Override
 	public void run() {
 		Map<Integer, TspPath> startCityToTspPath = BlackBoard.getInstance().getStartCityToTsppath();
@@ -19,6 +27,11 @@ public class Professor implements Runnable {
 		}
 	}
 
+	/**
+	 * CLones the TspPath map from Blackboard to avoid 
+	 * @param tspPath
+	 * @return
+	 */
 	public static TspPath deepClone(TspPath tspPath) {
 		TspPath clone = new TspPath(tspPath.getStartCity());
 		clone.setTotalDistance(tspPath.getTotalDistance());

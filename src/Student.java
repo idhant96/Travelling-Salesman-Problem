@@ -1,4 +1,8 @@
 
+/**
+ * @author idhant96
+ * Student calculates next nearest neighbor and ends the thread.
+ */
 public class Student implements Runnable {
     private boolean running = true;
     private int threadNumber, totalThreads;
@@ -20,6 +24,9 @@ public class Student implements Runnable {
         return running;
     }
 
+    /**
+     * Calls calculateNextNearestNeighbor function to get next node.
+     */
     @Override
     public void run() {
         BlackBoard blackboard = BlackBoard.getInstance();
