@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class Classroom implements Runnable {
 	private int studentCount = 5;
@@ -10,19 +13,23 @@ public class Classroom implements Runnable {
 
 	public void run() {
 		running = true;
+		ExecutorService fixedPool = Executors.newFixedThreadPool(studentCount);
 		try {
 			while (running) {
 				students = new ArrayList<>();
-				List<Thread> threads = new ArrayList<>();
+				List<Future> futures = new ArrayList<>();
 				for (int i = 1; i <= studentCount; i++) {
 					Student student = new Student(i, studentCount);
 					students.add(student);
-					Thread studentThread = new Thread(student);
-					threads.add(studentThread);
-					studentThread.start();
+//					Thread studentThread = new Thread(student);
+//					threads.add(studentThread);
+//					studentThread.start();
+					Future f = fixedPool.submit(student);
+					futures.add(f);
+					
 				}
-				for (Thread t : threads) {
-					t.join();
+				for (Future f : futures) {
+					f.get();
 				}
 				professor = new Professor();
 				Thread professorThread = new Thread(professor);
@@ -34,6 +41,7 @@ public class Classroom implements Runnable {
 						allCompleted = false;
 					}
 				}
+				students.clear();
 				if(allCompleted) {
 					running = false;
 				}

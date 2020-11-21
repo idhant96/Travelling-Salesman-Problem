@@ -45,7 +45,6 @@ public class Student implements Runnable {
         System.out.println("start city index: " + start);
         System.out.println("end city index: " + end);
         temp = start;
-        int completedCount = 0;
         TspPath lastTspPath = null;
         while (temp <= end) {
             if (!continueCompute()) {
@@ -57,8 +56,7 @@ public class Student implements Runnable {
                 tspPath.addCityToPath(temp);
                 blackboard.addTspPathForStartCity(tspPath);
             }
-            //System.out.println("Tsp Path size : "+ tspPath.getPath().size());
-            //System.out.println("Data point size : "+ datapointsSize);
+            System.out.println("Thread running is " + threadNumber);
             lastTspPath = tspPath;
             if (tspPath.getPath().size() > datapointsSize) {
                 continue;
@@ -67,11 +65,11 @@ public class Student implements Runnable {
             temp++;
 
         }
-        try {
-            Thread.sleep(100);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Thread.sleep(100);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         if (lastTspPath == null || lastTspPath.getPath().size() > datapointsSize) {
             System.out.println("Setting running to false for " + threadNumber);
             for (temp = start; temp <= end; temp++) {
