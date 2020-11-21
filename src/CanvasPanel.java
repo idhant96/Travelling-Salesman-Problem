@@ -17,6 +17,9 @@ public class CanvasPanel extends JPanel implements Observer {
 	private static final Color SECOND_PATH_COLOR = Color.PINK;
 	private static final Color THIRD_PATH_COLOR = Color.GRAY;
 	private static final Color POINTS_COLOR = Color.BLUE;
+	private static final int FIRST_PATH_LINE_THICKNESS = 5;
+	private static final int SECOND_PATH_LINE_THICKNESS = 10;
+	private static final int THIRD_PATH_LINE_THICKNESS = 15;
 	private State currentState;;
 	
 	public CanvasPanel() {
@@ -48,9 +51,9 @@ public class CanvasPanel extends JPanel implements Observer {
 					g.fillOval(coordinate[0], coordinate[1], VISITED_CITY_PAINT_DIAMETER, VISITED_CITY_PAINT_DIAMETER);
 				}
 				TspShortestPaths tspShortestPaths = TspController.getInstance().getTspShortestPaths();
-				drawLine(g, tspShortestPaths.getThirdShortestPath(), coordinates, 15,THIRD_PATH_COLOR);
-				drawLine(g, tspShortestPaths.getSecondShortestPath(), coordinates,10, SECOND_PATH_COLOR);
-				drawLine(g, tspShortestPaths.getFirstShortestPath(), coordinates,5,  FIRST_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getThirdShortestPath(), coordinates, THIRD_PATH_LINE_THICKNESS,THIRD_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getSecondShortestPath(), coordinates, SECOND_PATH_LINE_THICKNESS, SECOND_PATH_COLOR);
+				drawLine(g, tspShortestPaths.getFirstShortestPath(), coordinates, FIRST_PATH_LINE_THICKNESS,  FIRST_PATH_COLOR);
 
 			}
 		}
@@ -99,19 +102,18 @@ public class CanvasPanel extends JPanel implements Observer {
 	public boolean inOutputState() {
 		return currentState == State.OUTPUT_STATE;
 	}
-	
+
 	enum State {
 		INIT_STATE,
 		INPUT_STATE,
 		OUTPUT_STATE
 	}
 
-
 	@Override
 	public void update(Observable o, Object arg) {
 		repaint();
 	}
-	
+
 }
 
 

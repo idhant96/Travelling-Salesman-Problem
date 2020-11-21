@@ -14,9 +14,7 @@ public class SaveActionListener  implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Specify file to save");   
-		 
 		int userSelection = fileChooser.showSaveDialog(getSourcePanel(e));
-		System.out.println("User Selection: " + userSelection);
 		if (userSelection == JFileChooser.APPROVE_OPTION) {
 		    File fileToSave = fileChooser.getSelectedFile();
 		    TspController.getInstance().saveFile(fileToSave);

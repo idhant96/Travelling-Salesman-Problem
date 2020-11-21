@@ -15,7 +15,11 @@ public class TspFrame extends JFrame {
 		getContentPane().add(canvasPanel);
 		
 		menuPanel.setCanvasPanel(canvasPanel);
+	}
+	
+	public void display() {
 		pack();
 		setVisible(true);
-	}	
+	}
+	
 }

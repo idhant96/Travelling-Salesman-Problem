@@ -17,15 +17,15 @@ public class Classroom implements Runnable {
 		try {
 			while (running) {
 				students = new ArrayList<>();
-				List<Future> futures = new ArrayList<>();
+				List<Future<?>> futures = new ArrayList<>();
 				for (int i = 1; i <= studentCount; i++) {
 					Student student = new Student(i, studentCount);
 					students.add(student);
-					Future f = fixedPool.submit(student);
+					Future<?> f = fixedPool.submit(student);
 					futures.add(f);
 					
 				}
-				for (Future f : futures) {
+				for (Future<?> f : futures) {
 					f.get();
 				}
 				professor = new Professor();
