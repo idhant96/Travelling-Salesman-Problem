@@ -10,6 +10,9 @@ import javax.swing.JPopupMenu;
 
 public class OpenActionListener  implements ActionListener {
 
+	/**
+	 * Action to be performed when open button in menu is clicked.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -17,24 +20,29 @@ public class OpenActionListener  implements ActionListener {
 		fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
 		MenuPanel menuPanel = getSourcePanel(e);
 		if(menuPanel == null) {
-			System.out.println("Null Menu Panel");
 			return;
 		}
 		CanvasPanel canvasPanel = menuPanel.getCanvasPanel();
 		if(canvasPanel == null) {
-			System.out.println("Null canvas Panel");
 			return;
 		}
 		int result = fileChooser.showOpenDialog(menuPanel);
 		if (result == JFileChooser.APPROVE_OPTION) {
 		    File selectedFile = fileChooser.getSelectedFile();
-		    
 			canvasPanel.setToInputState();
 			int height = canvasPanel.getHeight() - 10;
 			int width = canvasPanel.getWidth() - 20;
+			TspController.getInstance().cleanSlate();
 			TspController.getInstance().loadFile(selectedFile, height, width);
 		}
 	}
+	
+
+	/**
+	 * Returns the SourcePanel for event source.
+	 * @param e
+	 * @return
+	 */
 	
 	public MenuPanel getSourcePanel(ActionEvent e){
 		JMenuItem menuItem = (JMenuItem) e.getSource(); 

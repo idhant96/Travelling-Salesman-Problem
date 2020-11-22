@@ -114,8 +114,12 @@ public class TspDataHandler {
 	}
 
 
+	/**
+	 * Reads data from given file and returns as String
+	 * @param fileObj
+	 * @return data from file as String
+	 */
 	public String readDataFromPath(File fileObj) {
-		// This the module to read the data from the file specified in the path.
 		String data = "";
 		String currentLine = "";
 		boolean dataStart = false;
@@ -124,16 +128,9 @@ public class TspDataHandler {
 			Scanner myReader = new Scanner(myObj);
 			while (myReader.hasNextLine()) {
 				currentLine = myReader.nextLine();
-				// The string "xxx" is used as an delimiter for the symmetrical
-				// Data
-
 				if (dataStart) {
 					data += currentLine + "xxx";
 				}
-				// We use the header information to extract the dimension from
-				// the file
-				// We also use the header information to identify the start of
-				// the actual data
 				if (currentLine.contains("NODE_COORD_SECTION") || currentLine.contains("1 ")) {
 					dataStart = true;
 				}
@@ -144,8 +141,6 @@ public class TspDataHandler {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
-		// The data is passed on to the Data Processing Module in the form of a
-		// String for processing.
 		return data;
 
 	}

@@ -11,6 +11,9 @@ import javax.swing.SwingUtilities;
 
 public class NewActionListener implements ActionListener {
 
+	/**
+	 * Action to be performed when new button in menu is clicked.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		TspController.getInstance().cleanSlate();
@@ -19,6 +22,12 @@ public class NewActionListener implements ActionListener {
 		menuPanel.getCanvasPanel().clean();
 	}
 
+	/**
+	 * Returns the SourcePanel for event source.
+	 * @param e
+	 * @return
+	 */
+	
 	public MenuPanel getSourcePanel(ActionEvent e){
 		JMenuItem menuItem = (JMenuItem) e.getSource(); 
 		JPopupMenu popupMenu = (JPopupMenu) menuItem.getParent(); 

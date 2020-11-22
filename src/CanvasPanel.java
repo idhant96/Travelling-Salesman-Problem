@@ -33,6 +33,9 @@ public class CanvasPanel extends JPanel implements Observer {
 		currentState = State.INIT_STATE;
 	}
 
+	/**
+	 * Fetches information from the blackboard and paints on the canvas panel.
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		if(currentState !=  State.INIT_STATE) {
@@ -59,6 +62,14 @@ public class CanvasPanel extends JPanel implements Observer {
 		}
 	}
 	
+	/**
+	 * Draws a lines connecting paths for the given tspPath
+	 * @param g
+	 * @param tspPath
+	 * @param coordinates
+	 * @param stroke
+	 * @param lineColor
+	 */
 	private void drawLine(Graphics g, TspPath tspPath, List<int[]> coordinates, int stroke, Color lineColor) {
 		List<Integer> cities = tspPath.getPath();
 		for(int i = 1; i < cities.size(); i++) {
@@ -84,25 +95,41 @@ public class CanvasPanel extends JPanel implements Observer {
 		}
 	}
 	
+	/**
+	 * Sets state to input state
+	 */
 	public void setToInputState() {
 		currentState = State.INPUT_STATE;
 	}
 	
+	/**
+	 * Sets state to output state
+	 */
 	public void setToOuputState() {
 		currentState = State.OUTPUT_STATE;
 	}
-	
-	public State getState() {
-		return currentState;
-	}
 
+	/**
+	 * Repaints the canvas pane
+	 */
 	public void clean() {
 		repaint();
 	}
+
+	/**
+	 * checks if current state 
+	 * @return boolean
+	 */
 	public boolean inOutputState() {
 		return currentState == State.OUTPUT_STATE;
 	}
 
+	/**
+	 * State of the canvas panel
+	 * INIT_STATE - initialized state, before accepting input
+	 * INPUT_STATE - Read inputs from file or add points on the canvas panel
+	 * OUTPUT_STATE - Paints top 3 paths on the canvas panel
+	 */
 	enum State {
 		INIT_STATE,
 		INPUT_STATE,

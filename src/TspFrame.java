@@ -17,6 +17,9 @@ public class TspFrame extends JFrame {
 		menuPanel.setCanvasPanel(canvasPanel);
 	}
 	
+	/**
+	 * Makes the JFrame visible.
+	 */
 	public void display() {
 		pack();
 		setVisible(true);

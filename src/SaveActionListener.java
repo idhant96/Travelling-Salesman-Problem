@@ -10,6 +10,9 @@ import javax.swing.JPopupMenu;
 
 public class SaveActionListener  implements ActionListener {
 
+	/**
+	 * Action to be performed when save button in menu is clicked.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JFileChooser fileChooser = new JFileChooser();
@@ -22,6 +25,12 @@ public class SaveActionListener  implements ActionListener {
 		
 	}
 	
+	/**
+	 * Returns the SourcePanel for event source.
+	 * 
+	 * @param e
+	 * @return
+	 */
 	public MenuPanel getSourcePanel(ActionEvent e){
 		JMenuItem menuItem = (JMenuItem) e.getSource(); 
 		JPopupMenu popupMenu = (JPopupMenu) menuItem.getParent(); 

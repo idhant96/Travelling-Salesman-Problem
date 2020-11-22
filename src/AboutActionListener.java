@@ -13,6 +13,10 @@ import javax.swing.event.MenuListener;
 
 public class AboutActionListener implements MenuListener {
 
+	/**
+	 * Displays authors when about menu is selected.
+	 * @param e
+	 */
 	@Override
 	public void menuSelected(MenuEvent e) {
 		JDialog d = new JDialog(getJFrame(e), "Authors");
@@ -21,7 +25,7 @@ public class AboutActionListener implements MenuListener {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		panel.add(new JLabel("Akhilesh Krishnan (akrish84"));
 		panel.add(new JLabel("Rahul Suresh (rsures13)"));
-		panel.add(new JLabel("Idhant Haldankar ()"));
+		panel.add(new JLabel("Idhant Haldankar (ihaldank)"));
 		d.add(panel);
 		d.setPreferredSize(new Dimension(400, 200));
 		d.pack();
@@ -29,6 +33,11 @@ public class AboutActionListener implements MenuListener {
 		d.setVisible(true);
 	}
 	
+	/**
+	 * Gets the JFrame from source of event.
+	 * @param e
+	 * @return
+	 */
 	public JFrame getJFrame(MenuEvent e){
 		JMenu popupMenu = (JMenu) e.getSource(); 
 		JMenuBar bar = (JMenuBar)popupMenu.getParent();

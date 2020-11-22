@@ -4,7 +4,12 @@ import java.util.Set;
 
 public class NearestNeighbor {
 
-
+	/**
+	 * 
+	 * Calculates only the next nearest neighbor for that last visited city and adds to the path.
+	 * 
+	 * @param tspPath
+	 */
     public void calculateNextNearestNeighbor(TspPath tspPath) {
         DataPoints dataPoints = BlackBoard.getInstance().getDatapoints();
         List<Integer> path = tspPath.getPath();

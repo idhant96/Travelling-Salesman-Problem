@@ -12,15 +12,17 @@ public class Student implements Runnable {
         this.totalThreads = totalThreads;
     }
 
+    /**
+     * Sets running status of student to false
+     */
     public void stopCompute() {
         this.running = false;
     }
 
-    private boolean continueCompute() {
-        return this.running == true;
-    }
-
-    public boolean isRunning() {
+    /**
+     * Sets running status of student to true
+     */
+    public boolean continueCompute() {
         return running;
     }
 

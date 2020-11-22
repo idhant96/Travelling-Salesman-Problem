@@ -15,6 +15,10 @@ public class BlackBoard extends Observable {
     private BlackBoard() {
     }
 
+    /**
+     * Adds coordinates to data points and notifies blackboard observers.
+     * @param coordinate
+     */
     public void addCoordinatesToDataPoints(int[] coordinate) {
     	if(datapoints == null) {
     		datapoints = new DataPoints();
@@ -23,10 +27,18 @@ public class BlackBoard extends Observable {
         update();
     }
 
+    /**
+     * Returns data points
+     * @return
+     */
     public DataPoints getDatapoints() {
         return datapoints;
     }
 
+    /**
+     * returns TspShortestPAths
+     * @return
+     */
     public TspShortestPaths getTspShortestPaths() {
     	if(tspShortestPaths == null) {
     		tspShortestPaths = new TspShortestPaths();
@@ -34,6 +46,9 @@ public class BlackBoard extends Observable {
         return tspShortestPaths;
     }
 
+    /**
+     * Cleans all data in the blackboard.
+     */
     public void cleanSlate() {
         datapoints = null;
         tspShortestPaths = null;
@@ -41,6 +56,11 @@ public class BlackBoard extends Observable {
 
     }
 
+    /**
+     * Returns TspPath object for startCity
+     * @param startCity
+     * @return
+     */
     public TspPath getTspPathForStartCity(int startCity) {
         if (startCityToTspPath == null) {
             startCityToTspPath = new HashMap<>();
@@ -53,23 +73,38 @@ public class BlackBoard extends Observable {
 
     }
 
-    public void addTspPathForStartCity( TspPath tspPathObj) {
+    /**
+     * Adds tsp path for city
+     * @param tspPath
+     */
+    public void addTspPathForStartCity( TspPath tspPath) {
         if (startCityToTspPath == null) {
             startCityToTspPath = new HashMap<>();
         }
-        startCityToTspPath.put(tspPathObj.getStartCity(), tspPathObj);
+        startCityToTspPath.put(tspPath.getStartCity(), tspPath);
     }
 
 
+    /**
+     * Notifies its observers about change in its data.
+     */
     public void update() {
         setChanged();
         notifyObservers();
     }
 
+    /**
+     * Returns the start city to tsp path map
+     * @return
+     */
     public Map<Integer, TspPath> getStartCityToTsppath() {
         return startCityToTspPath;
     }
 
+    /**
+     * returns tspShortestPath object
+     * @return
+     */
     public TspShortestPaths getTspShortestPath() {
         if (tspShortestPaths == null) {
             tspShortestPaths = new TspShortestPaths();
@@ -77,6 +112,12 @@ public class BlackBoard extends Observable {
         return tspShortestPaths;
     }
 
+    /**
+     * Sets shortest tsp paths and notifies all blackboard observers
+     * @param firstShortestPath
+     * @param secondShortestPath
+     * @param thirdShortestPath
+     */
     public void setShortestTspPaths(TspPath firstShortestPath, TspPath secondShortestPath, TspPath thirdShortestPath) {
         TspShortestPaths tspShortestPaths = getTspShortestPath();
         tspShortestPaths.setFirstShortestPath(firstShortestPath);

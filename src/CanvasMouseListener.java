@@ -3,6 +3,10 @@ import java.awt.event.MouseListener;
 
 public class CanvasMouseListener implements MouseListener{
 	
+	/**
+	 * Action to be performed when user clicks on the canvas panel
+	 */
+	
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		CanvasPanel canvasPanel = (CanvasPanel)e.getSource();

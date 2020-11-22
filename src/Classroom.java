@@ -41,7 +41,7 @@ public class Classroom implements Runnable {
 				professorThread.join();
 				boolean allStudentsCompleted = true;
 				for(Student student : students) {
-					if(student.isRunning()) {
+					if(student.continueCompute()) {
 						allStudentsCompleted = false;
 					}
 				}

@@ -12,6 +12,7 @@ public class Professor implements Runnable {
 
 	/**
 	 * Invokes TspPath sort  and stores three shortest paths.
+	 * 
 	 */
 
 	@Override

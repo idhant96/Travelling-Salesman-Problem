@@ -7,6 +7,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class MenuPanel extends JPanel {
+	
 	CanvasPanel canvasPanel;
 	private static final int MAX_HEIGHT = 20;
 
@@ -34,6 +35,10 @@ public class MenuPanel extends JPanel {
 		return canvasPanel;
 	}
 
+	/**
+	 * Creates Menu and Sub menu for File
+	 * @return JMenu
+	 */
 	private JMenu createFileMenu() {
 		JMenu fileMenu = new JMenu("File");
 		JMenuItem openMenuItem = new JMenuItem("Open");
@@ -48,6 +53,10 @@ public class MenuPanel extends JPanel {
 		return fileMenu;
 	}
 
+	/**
+	 * Creates Menu and Sub menu for Project
+	 * @return JMenu
+	 */
 	private JMenu createProjectMenu() {
 		JMenu projectMenu = new JMenu("Project");
 		JMenuItem newMenuItem = new JMenuItem("New");
@@ -65,6 +74,10 @@ public class MenuPanel extends JPanel {
 		return projectMenu;
 	}
 
+	/**
+	 * Creates Menu for About
+	 * @return JMenu
+	 */
 	private JMenu createAboutMenu() {
 		JMenu aboutMenu = new JMenu("About");
 		aboutMenu.addMenuListener(new AboutActionListener());

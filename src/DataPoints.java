@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  * 
- * An element of Blackboard which stores the datappints for the TSP to be computed on.
+ * An element of Blackboard which stores the data points for the TSP to be computed on.
  *
  */
 public class DataPoints {
@@ -21,33 +21,31 @@ public class DataPoints {
         coordinates.add(coordinate);
     }
 /**
- * calcualtees distance between two nodes.
+ * calculates distance between two nodes.
  * @param city1Index
  * @param city2Index
  * 
  */
     public int getDistance(int city1Index, int city2Index) {
-//        String cityKey =  Integer.toString(city1Index) + Integer.toString(city2Index);
-//        int shortestDistance;
-//        if(shortestDistancesAtoB == null) {
-//        	shortestDistancesAtoB = new HashMap<>();
-//        }
-//        if(shortestDistancesAtoB.containsKey(cityKey)){
-//            shortestDistance = shortestDistancesAtoB.get(cityKey);
-//        }else{
             int[] city1Coordinates= coordinates.get(city1Index);
             int[] city2Coordinates= coordinates.get(city2Index);
             int shortestDistance = (int) (Math.sqrt(Math.pow((city2Coordinates[0] - city1Coordinates[0]), 2) + Math.pow((city2Coordinates[1] - city1Coordinates[1]), 2)));
-            //shortestDistancesAtoB.put(cityKey, shortestDistance);
-        //}
         return shortestDistance;
 
     }
 
+    /**
+     * 
+     * @return coordinates
+     */
     public List<int[]> getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * Number of coordinates in DataPoints
+     * @return
+     */
     public int getLength() {
     	return coordinates.size();
     }
