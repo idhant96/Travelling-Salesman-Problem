@@ -58,12 +58,8 @@ public class Student implements Runnable {
 
         }
         if (lastTspPath == null || lastTspPath.getPath().size() > datapointsSize) {
-            for (temp = start; temp <= end; temp++) {
-                System.out.println(blackboard.getTspPathForStartCity(temp));
-            }
             running = false;
         }
-
     }
 
 }

@@ -67,6 +67,7 @@ public class MenuPanel extends JPanel {
 
 	private JMenu createAboutMenu() {
 		JMenu aboutMenu = new JMenu("About");
+		aboutMenu.addMenuListener(new AboutActionListener());
 		return aboutMenu;
 	}
 

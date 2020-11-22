@@ -32,19 +32,17 @@ public class Classroom implements Runnable {
 				Thread professorThread = new Thread(professor);
 				professorThread.start(); 
 				professorThread.join();
-				boolean allCompleted = true;
+				boolean allStudentsCompleted = true;
 				for(Student student : students) {
 					if(student.isRunning()) {
-						allCompleted = false;
+						allStudentsCompleted = false;
 					}
 				}
 				students.clear();
-				if(allCompleted) {
+				if(allStudentsCompleted) {
 					running = false;
-					
 				}
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

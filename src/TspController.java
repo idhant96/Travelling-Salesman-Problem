@@ -35,11 +35,15 @@ public class TspController {
 	}
 
 	public void stop() {
-		classroom.stop();
+		if(classroom != null) {
+			classroom.stop();
+		}
 	}
 
 	public void cleanSlate() {
-		classroom = null;
+		if(classroom != null) {
+			classroom = null;
+		}
 		BlackBoard.getInstance().cleanSlate();
 	}
 
