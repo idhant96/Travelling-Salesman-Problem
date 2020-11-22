@@ -5,6 +5,12 @@ import java.util.Scanner;
 
 public class TspDataHandler {
 
+	/**
+	 * stores the coordinates present in the input file.
+	 * @param fileObj
+	 * @param screenHeight
+	 * @param screenWidth
+	 */
 	public void loadDataPointsFromFile(File fileObj, int screenHeight, int screenWidth) {
 		String rawTspData = readDataFromPath(fileObj);
 		List<int[]> processedTspData = processSymmetricData(rawTspData);
@@ -14,7 +20,10 @@ public class TspDataHandler {
 			addCoordinatesToDataPoints(coordinate[0], coordinate[1]);
 		}
 	}
-
+/**
+ * saves the coordinates in a file.
+ * @param file
+ */
 	public void saveFile(File file) {
 		DataPoints dataPoints = BlackBoard.getInstance().getDatapoints();
 		if (dataPoints == null) {
@@ -34,7 +43,12 @@ public class TspDataHandler {
 		}
 
 	}
-
+	
+/**
+ * formats for saving in file.
+ * @param coordinates
+ * @return
+ */
 	public String formatFileSaveContent(List<int[]> coordinates) {
 		String content = "";
 		int index = 0;
@@ -47,6 +61,13 @@ public class TspDataHandler {
 		return content;
 	}
 
+	/**
+	 * normalizes the input coordinates to coordinates which can be fit into the UI panel.
+	 * @param processedTspData
+	 * @param screenHeight
+	 * @param screenWidth
+	 * @return
+	 */
 	public List<int[]> normalizeCoordinates(List<int[]> processedTspData, int screenHeight, int screenWidth) {
 		int minX = Integer.MAX_VALUE;
 		int maxX = -1;
@@ -92,6 +113,7 @@ public class TspDataHandler {
 
 	}
 
+
 	public String readDataFromPath(File fileObj) {
 		// This the module to read the data from the file specified in the path.
 		String data = "";
@@ -128,6 +150,11 @@ public class TspDataHandler {
 
 	}
 
+	/**
+	 * Store the read data into coordinates datapoints.
+	 * @param data
+	 * @return
+	 */
 	public List<int[]> processSymmetricData(String data) {
 		String[] splitData = data.split("xxx");
 		List<int[]> coordinates = new ArrayList<int[]>();
@@ -146,11 +173,20 @@ public class TspDataHandler {
 
 	}
 
+	/**
+	 * Adds the coordinates to datapoints inside Blackboard.
+	 * @param xCoordinate
+	 * @param yCoordinate
+	 */
 	public void addCoordinatesToDataPoints(int xCoordinate, int yCoordinate) {
 		int[] coordinate = new int[] { xCoordinate, yCoordinate };
 		BlackBoard.getInstance().addCoordinatesToDataPoints(coordinate);
 	}
 
+	/**
+	 * Fetch datapoints from Blackboard.
+	 * @return
+	 */
 	public List<int[]> getCoordinatesDataPoints() {
 		DataPoints dataPoints = BlackBoard.getInstance().getDatapoints();
 		if (dataPoints == null) {

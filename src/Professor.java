@@ -3,7 +3,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * Runnable class for 3 shorted paths after every nearest neighbour in each thread is calculated.
+ *
+ */
 public class Professor implements Runnable {
+
+	/**
+	 * Invokes TspPath sort  and stores three shortest paths.
+	 */
+
 	@Override
 	public void run() {
 		Map<Integer, TspPath> startCityToTspPath = BlackBoard.getInstance().getStartCityToTsppath();

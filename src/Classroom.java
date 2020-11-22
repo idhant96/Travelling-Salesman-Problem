@@ -4,15 +4,22 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+/**
+ * 
+ * @author idhant96
+ * classrom runs as a thread. Invokes student and professor threads.
+ */
 public class Classroom implements Runnable {
 	private int studentCount = 5;
 	private List<Student> students;
 	private Professor professor;
 
-	private boolean running;
-
+	
+	/**
+	 * manages students and professor threads.
+	 */
 	public void run() {
-		running = true;
+		boolean running = true;
 		ExecutorService fixedPool = Executors.newFixedThreadPool(studentCount);
 		try {
 			while (running) {
@@ -48,6 +55,9 @@ public class Classroom implements Runnable {
 		}
 	}
 
+	/**
+	 * stops all threads in classroom when stop is clicked.
+	 */
 	public void stop() {
 		Student student;
 		if (!students.isEmpty()) {
@@ -58,6 +68,9 @@ public class Classroom implements Runnable {
 		}
 	}
 
+	/**
+	 * stops all threads in classroom when new is clicked.
+	 */
 	public void cleanSlate() {
 		stop();
 		students = null;

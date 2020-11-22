@@ -1,4 +1,7 @@
 
+/**
+ * Blackboard element to store top 3 shortest paths.
+ */
 public class TspShortestPaths {
 	
 	private TspPath firstShortestPath;

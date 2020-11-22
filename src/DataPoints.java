@@ -3,6 +3,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 
+ * An element of Blackboard which stores the datappints for the TSP to be computed on.
+ *
+ */
 public class DataPoints {
     List<int[]> coordinates;
     Map<String, Integer> shortestDistancesAtoB;
@@ -15,7 +20,12 @@ public class DataPoints {
     public void addCityCoordinates(int[] coordinate) {
         coordinates.add(coordinate);
     }
-
+/**
+ * calcualtees distance between two nodes.
+ * @param city1Index
+ * @param city2Index
+ * 
+ */
     public int getDistance(int city1Index, int city2Index) {
 //        String cityKey =  Integer.toString(city1Index) + Integer.toString(city2Index);
 //        int shortestDistance;

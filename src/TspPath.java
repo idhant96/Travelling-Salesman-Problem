@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author idhant96
+ * A blackboard element to store the path distance and staring node.
+ */
 public class TspPath implements Comparable<TspPath>{
 	private List<Integer> path;
 	private int totalDistance;
