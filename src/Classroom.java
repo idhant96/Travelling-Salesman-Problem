@@ -51,7 +51,7 @@ public class Classroom implements Runnable {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Classroom faced an issue.");
 		}
 	}
 

@@ -37,6 +37,10 @@ public class Student implements Runnable {
         int start, end, datapointsSize, div, temp;
         datapointsSize = blackboard.getDatapoints().getLength();
         div = Math.round(datapointsSize / totalThreads);
+        if(threadNumber > datapointsSize) {
+        	running = false;
+        	return;
+    	}
         if (threadNumber == totalThreads) {
             end = datapointsSize;
             start = (div * (threadNumber - 1)) + 1;
@@ -46,6 +50,9 @@ public class Student implements Runnable {
         }
         start = start - 1;
         end = end - 1;
+        if(end < start) {
+        	end = start;
+        }
         temp = start;
         TspPath lastTspPath = null;
         while (temp <= end) {
@@ -64,7 +71,6 @@ public class Student implements Runnable {
             }
             nearestNeighbour.calculateNextNearestNeighbor(tspPath);
             temp++;
-
         }
         if (lastTspPath == null || lastTspPath.getPath().size() > datapointsSize) {
             running = false;

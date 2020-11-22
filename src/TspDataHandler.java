@@ -12,7 +12,13 @@ public class TspDataHandler {
 	 * @param screenWidth
 	 */
 	public void loadDataPointsFromFile(File fileObj, int screenHeight, int screenWidth) {
-		String rawTspData = readDataFromPath(fileObj);
+		String rawTspData = "";
+		try {
+			rawTspData = readDataFromPath(fileObj);
+		} catch(Exception e) {
+			System.out.println("Error while reading file: " + fileObj);
+			System.out.println("Kindly check if file is in TSP Format");
+		}
 		List<int[]> processedTspData = processSymmetricData(rawTspData);
 		List<int[]> scaledTspData = normalizeCoordinates(processedTspData, screenHeight, screenWidth);
 

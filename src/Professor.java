@@ -18,6 +18,9 @@ public class Professor implements Runnable {
 	@Override
 	public void run() {
 		Map<Integer, TspPath> startCityToTspPath = BlackBoard.getInstance().getStartCityToTsppath();
+		if(startCityToTspPath == null) {
+			return;
+		}
 		List<TspPath> paths = new ArrayList<>();
 		for(Integer startCity : startCityToTspPath.keySet()) {
 			paths.add(startCityToTspPath.get(startCity));
